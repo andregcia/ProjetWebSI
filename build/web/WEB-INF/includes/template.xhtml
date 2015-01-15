@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <!-- Fragment "htmlHead" -->
+        <ui:insert name="htmlHead" />
+        <link rel="stylesheet" type="text/css" href="css/template.css" />
+    </h:head>
+    <h:body>
+        <!-- Fragment "Header" -->
+        <h:panelGroup layout="block" styleClass="entete">
+            <ui:include	src="/WEB-INF/includes/entete.xhtml"	/>
+        </h:panelGroup>
+        <h:panelGrid columns="2" columnClasses="nav-col,main-col" styleClass="middle-table">
+            <!-- Fragment "Navigation" -->
+            <h:panelGroup layout="block">
+                <ui:insert name="navigation" />
+            </h:panelGroup>
+            <!-- Fragment "Container" -->
+            <h:panelGroup layout="block">
+                <ui:insert name="main" />
+            </h:panelGroup>
+        </h:panelGrid>
+        <!-- Fragment "Footer" -->
+        <h:panelGroup layout="block" styleClass="piedpage">
+            <ui:include	src="/WEB-INF/includes/piedpage.xhtml" />
+        </h:panelGroup>
+    </h:body>
+</html>

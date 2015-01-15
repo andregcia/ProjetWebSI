@@ -1,0 +1,20 @@
+<html	xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <head>
+        <title>Cours en ligne</title>
+    </head>
+    <body>
+        <ui:composition	template="/WEB-INF/includes/template.xhtml">
+            <!-- partie	"htmlHead" du template remplacée par le	fragment suivant -->
+            <ui:define name="htmlHead">
+                <meta name="description" content="La page d’accueil"/>
+                <title>Entreprise - Accueil</title>
+            </ui:define>
+            <!-- partie	"main" du template remplacée par le fragment suivant -->
+            <ui:define name="main">
+                <h:outputText value="Bienvenue sur la page d’accueil."/>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
