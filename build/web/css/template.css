@@ -1,25 +1,34 @@
-.entete,.piedpage{
-    background-color:#cfcfcf;
-    width:500px;
+.entete{
+    background-color:#EDF7F2;
+    height:10%;
+    width:100%;
+    padding-top:20px;
+    text-align: center;
+    font-size: 30px;
+}
+.piedpage{
+    background-color:#EDF7F2;
+    height:5%;
+    text-align: center;
+    width:100%;
 }
 .main{
     display:inline;
 }
 .middle-table{
     border-width:0px;	
-    width:500px;
+    width:100%;
 }
 .middle-table td{
     padding:0px;
     vertical-align:top;
 }
 .nav-col{
-    background-color:#ccccff;	
-    width:30%;
+    background-color:#7FC6BC;
+    width:20%;
 }
 
 .main-col{
-    background-color:#aaaaaa;
     width:70%;
 }
 .nav-col a{
@@ -31,6 +40,35 @@
 }
 .nav-col .selected{
     font-weight:bold;
+}
+.nav{
+    margin-top:10px;
+    margin-left: 5px;
+    margin-bottom:10px;
+}
+.nav a{
+    text-decoration: none;
+    color: darkgreen;
+}
+
+#connexionForm{
+    margin-top:30px;
+    margin-left:30px;
+    margin-bottom: 20px;
+}
+
+#connexionForm .champ{
+    width: 180px;
+    margin-left:5px;
+    margin-bottom: 5px;
+    border:1px solid #333333;
+}
+.msgError{
+    color:red;
+    margin-left:30px;
+    background-color:bisque;
+    border:1px solid red;
+    width: 50%;
 }
 
 

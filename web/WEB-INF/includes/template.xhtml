@@ -13,12 +13,14 @@
             <ui:include	src="/WEB-INF/includes/entete.xhtml"	/>
         </h:panelGroup>
         <h:panelGrid columns="2" columnClasses="nav-col,main-col" styleClass="middle-table">
-            <!-- Fragment "Navigation" -->
-            <h:panelGroup layout="block">
-                <ui:insert name="navigation" />
+            <h:panelGroup layout="block" styleClass="nav">
+                <h:form>
+                    <!-- Fragment "navigation" -->
+                    <ui:insert name="navigation" />
+                </h:form>
             </h:panelGroup>
-            <!-- Fragment "Container" -->
             <h:panelGroup layout="block">
+                <!-- Fragment "main" -->
                 <ui:insert name="main" />
             </h:panelGroup>
         </h:panelGrid>

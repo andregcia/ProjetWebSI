@@ -1,5 +1,6 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @NamedQuery(name="findAllCours", query="SELECT i FROM Cours i")
-public class Cours {
+public class Cours implements Serializable {
     
     @Id
     @GeneratedValue
@@ -31,6 +32,14 @@ public class Cours {
         this.description = description;
         this.picture = picture;
         this.price = price;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
