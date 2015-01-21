@@ -21,9 +21,9 @@
             <!-- partie	"navigation" du template remplacée par le fragment suivant -->
             <ui:define name="navigation">
                 <h:outputText styleClass="selected" value="Accueil" />
-                <h:commandLink action="listeCours" value="Mes Cours" />
-                <h:commandLink action="#{connectBean.deconnexion}." value="Déconnexion" id="msgLogin"/>
-                <h:commandLink action="admin" value="Administration" />
+                <h:commandLink action="listeCours?faces-redirect=true&amp;includeViewParams=true" value="Les Cours" />
+                <h:commandLink action="#{connectBean.deconnexion}" value="Déconnexion" id="msgLogin"/>
+                <h:commandLink action="admin?faces-redirect=true&amp;includeViewParams=true" value="Administration" />
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">

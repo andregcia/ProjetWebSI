@@ -15,9 +15,8 @@
             </ui:define>
             <!-- partie	"navigation" du template remplacée par le fragment suivant -->
             <ui:define name="navigation">
-                <h:commandLink action="index" value="Accueil" />
+                <h:commandLink action="index?faces-redirect=true&amp;includeViewParams=true" value="Accueil" />
                 <h:commandLink styleClass="selected" value="Connexion" />
-                <h:commandLink action="admin" value="Administration" />
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">

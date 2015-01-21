@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
@@ -16,13 +17,15 @@ public class Cours implements Serializable {
     
     @Id
     @GeneratedValue
-    private int id;
+    private int idcours;
     private String title;
     private String description;
     private String picture;
     private int price;
     @OneToMany(cascade=CascadeType.ALL,mappedBy="cours")
     private List<Episode> listEpisode;
+    @ManyToOne(optional = false)
+    private User user;
 
     public Cours() {
     }
@@ -34,12 +37,12 @@ public class Cours implements Serializable {
         this.price = price;
     }
     
-    public int getId() {
-        return id;
+    public int getIdCours() {
+        return idcours;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdCours(int id) {
+        this.idcours = id;
     }
 
     public String getTitle() {
@@ -74,6 +77,14 @@ public class Cours implements Serializable {
         this.price = price;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+       
     public List<Episode> getListEpisode() {
         return listEpisode;
     }

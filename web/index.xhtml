@@ -18,24 +18,12 @@
             <!-- partie	"navigation" du template remplacée par le fragment suivant -->
             <ui:define name="navigation">
                 <h:outputText styleClass="selected" value="Accueil" />
-                <h:commandLink action="connect" value="Connexion" />
-                <h:commandLink action="admin" value="Administration" />
+                <h:commandLink action="connect?faces-redirect=true&amp;includeViewParams=true" value="Connexion" />
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
-                <h:form>
-                    <p:dataTable value="#{listeCours.liste}" var="l">
-                        <p:column headerText="Cours">
-                            <h:outputText value="#{l.title}"/>
-                        </p:column>
-                        <p:column headerText="Description">
-                            <h:outputText value="#{l.description}"/>
-                        </p:column>
-                        <p:column headerText="Prix">
-                            <h:outputText value="#{l.price}"/>
-                        </p:column>
-                    </p:dataTable>
-                </h:form>
+                <h:outputText styleClass="bloc1ac" value="Les cours MIAGic est une plateforme qui fonctionne en partenariat avec les plus grandes universités et organisations mondiales, pour offrir des cours en ligne accessibles à tous et gratuits."/>
+                <h:outputText styleClass="bloc2ac" value="Choisissez parmi des centainnes de cours créés par les plus grandes institutions éducationnelles du monde. Les cours sont ouvert à tous, et sont gratuits."/>
             </ui:define>
         </ui:composition>
     </body>

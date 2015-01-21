@@ -20,15 +20,14 @@
             </ui:define>
             <!-- partie	"navigation" du template remplacée par le fragment suivant -->
             <ui:define name="navigation">
-                <h:commandLink action="index" value="Accueil" />
-                <h:commandLink action="listeCours" value="Cours en ligne" />
-                <h:commandLink action="nouveauCours" value="Ajouter cours" />
+                <h:commandLink action="index?faces-redirect=true&amp;includeViewParams=true" value="Accueil" />
+                <h:commandLink action="listeCours?faces-redirect=true&amp;includeViewParams=true" value="Cours en ligne" />
+                <h:commandLink action="nouveauCours?faces-redirect=true&amp;includeViewParams=true" value="Ajouter cours" />
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
-                <!--
-                    CORPUS 
-                -->
+                <h:outputText value="Bonjour,"/>
+                <h:outputText value="vous êtes dans l'espace administration."/>
             </ui:define>
         </ui:composition>
     </body>

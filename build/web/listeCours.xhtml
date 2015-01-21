@@ -17,16 +17,24 @@
             </ui:define>
             <!-- partie	"navigation" du template remplacée par le fragment suivant -->
             <ui:define name="navigation">
-                <h:commandLink action="index" value="Accueil" />
+                <h:commandLink action="index?faces-redirect=true&amp;includeViewParams=true" value="Accueil" />
                 <h:commandLink styleClass="selected" value="Cours en ligne" />
-                <h:commandLink action="connect" value="Connexion" />
-                <h:commandLink action="admin" value="Administration" />
+                <h:commandLink action="#{connectBean.deconnexion}" value="Déconnexion" />
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
-                <!--
-                    CORPUS 
-                -->
+                <p:dataTable value="#{listeCours.liste}" var="l">
+                        <p:column headerText="Cours">
+                            <h:outputText value="#{l.title}"/>
+                        </p:column>
+                        <p:column headerText="Description">
+                            <h:outputText value="#{l.description}"/>
+                        </p:column>
+                        <p:column headerText="Prix">
+                            <h:outputText value="#{l.price}"/>
+                            <h:commandButton  value="Acheter" action="#"/>
+                        </p:column>
+                    </p:dataTable>  
             </ui:define>
         </ui:composition>
     </body>
