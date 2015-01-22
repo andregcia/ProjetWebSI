@@ -1,6 +1,6 @@
 package presentation;
 
-import boundary.LesCours;
+import boundary.Courses;
 import entity.Cours;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,14 +13,14 @@ import javax.inject.Named;
 public class ListeCours {
    
     @Inject
-    private LesCours courses;
+    private Courses courses;
     private List<Cours> liste = new ArrayList<>();
 
-    public LesCours getCourss() {
+    public Courses getCourss() {
         return courses;
     }
 
-    public void setCourss(LesCours courses) {
+    public void setCourss(Courses courses) {
         this.courses = courses;
     }
 
