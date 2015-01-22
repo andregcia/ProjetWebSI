@@ -6,13 +6,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 
 @Entity
-@NamedQuery(name="findAllCours", query="SELECT i FROM Cours i")
+@NamedQuery(name="findAllCourses", query="SELECT i FROM Cours i")
 public class Cours implements Serializable {
     
     @Id
@@ -24,9 +24,9 @@ public class Cours implements Serializable {
     private int price;
     @OneToMany(cascade=CascadeType.ALL,mappedBy="cours")
     private List<Episode> listEpisode;
-    @ManyToOne(optional = false)
-    private Member user;
-
+    @ManyToMany(cascade=CascadeType.ALL,mappedBy="listCours")
+    private List<Member> listuser;
+    
     public Cours() {
     }
 
@@ -77,12 +77,20 @@ public class Cours implements Serializable {
         this.price = price;
     }
 
-    public Member getUser() {
-        return user;
+    public int getIdcours() {
+        return idcours;
     }
 
-    public void setUser(Member user) {
-        this.user = user;
+    public void setIdcours(int idcours) {
+        this.idcours = idcours;
+    }
+
+    public List<Member> getListuser() {
+        return listuser;
+    }
+
+    public void setListuser(List<Member> listuser) {
+        this.listuser = listuser;
     }
        
     public List<Episode> getListEpisode() {

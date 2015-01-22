@@ -1,16 +1,18 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 
 @Entity
-@NamedQuery(name="findAllUsers", query="SELECT i FROM User i")
-public class Member {
+
+@NamedQuery(name="findAllMembers", query="SELECT i FROM Member i")
+public class Member implements Serializable {
     
     @Id
     @GeneratedValue
@@ -21,18 +23,18 @@ public class Member {
     private String userName;
     private int scan;
     private String password;
-    //@OneToMany(cascade=CascadeType.ALL,mappedBy="member")
-    //private List<Cours> listCours;
+    @ManyToMany
+    private List<Cours> listCours;
 
     public Member() {
     }
 
-    public Member(String firstName, String lastName, String email, String userName, int scan, String password) {
+    public Member(String firstName, String lastName, String email, String userName, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.userName = userName;
-        this.scan = scan;
+        this.scan = 0;
         this.password = password;
     }
 
@@ -84,11 +86,19 @@ public class Member {
         this.password = password;
     }
 
-    /*public List<Cours> getListCours() {
+    public List<Cours> getListCours() {
         return listCours;
     }
 
     public void setListCours(List<Cours> listCours) {
         this.listCours = listCours;
-    }*/    
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

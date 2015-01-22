@@ -50,24 +50,45 @@ public class ConnectBean implements Serializable {
             FacesMessage m = new FacesMessage("Votre nom d'utilisateur ou votre mot de passe est trop court ou trop long.");
             FacesContext.getCurrentInstance().addMessage("connexionForm:msgLogin", m);  
         }
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/ProjetWebSIAndreJulie", "app", " ");
-        String sql = "SELECT PASSWORD FROM APP.\"USER\" WHERE USERNAME= ?";
-        PreparedStatement pS = connection.prepareStatement(sql);
-        pS.setString(1, username);
-        if(pS.execute()){
+        if(loginExiste(username)){
             String passSecret = hash(password);
-            ResultSet rs = pS.executeQuery();
-            rs.next();
-            if(passSecret.equals(rs.getString("PASSWORD"))){
-                pS.close();
-                connection.close();
+            if(passSecret.equals(recupMDP(username))){
                 FacesContext.getCurrentInstance().getExternalContext().redirect("monProfil.xhtml");
             }else{
                 FacesMessage m = new FacesMessage("La combinaison username et password n'est pas correcte");
-                pS.close();
-                connection.close();
                 FacesContext.getCurrentInstance().addMessage("connexionForm:msgLogin", m);
             }
+        }
+    }
+    
+    public String recupMDP(String u) throws SQLException{
+        try{
+            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/ProjetWebSI", "app", "app");
+            String sql = "SELECT password FROM Member WHERE username= ?";
+            PreparedStatement pS = connection.prepareStatement(sql);
+            pS.setString(1, u);
+            ResultSet rs = pS.executeQuery();
+            rs.next();
+            String p = rs.getString(1);
+            return p;
+        }catch (SQLException e){
+            FacesMessage m = new FacesMessage("Problème d'identification !"+e);
+            FacesContext.getCurrentInstance().addMessage("connexionForm:msgLogin", m);
+            return null;
+        }
+    }
+    
+    public boolean loginExiste(String u){
+        try{
+            Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/ProjetWebSI", "app", "app");
+            String sql = "SELECT username FROM Member WHERE username= ?";
+            PreparedStatement pS = connection.prepareStatement(sql);
+            pS.setString(1, u);
+            return pS.execute();
+        }catch (SQLException e){
+            FacesMessage m = new FacesMessage("Problème d'identification !"+e);
+            FacesContext.getCurrentInstance().addMessage("connexionForm:msgLogin", m);
+            return false;
         }
     }
     

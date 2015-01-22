@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class LesCours {
+public class Courses {
     @PersistenceContext
     EntityManager emCours;
     
@@ -21,6 +21,6 @@ public class LesCours {
     }
     
     public List<Cours> findAll(){
-        return this.emCours.createNamedQuery("findAllCours",Cours.class).getResultList();
+        return this.emCours.createNamedQuery("findAllCourses",Cours.class).getResultList();
     }
 }
