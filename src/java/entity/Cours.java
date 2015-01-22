@@ -25,7 +25,7 @@ public class Cours implements Serializable {
     @OneToMany(cascade=CascadeType.ALL,mappedBy="cours")
     private List<Episode> listEpisode;
     @ManyToOne(optional = false)
-    private User user;
+    private Member user;
 
     public Cours() {
     }
@@ -77,11 +77,11 @@ public class Cours implements Serializable {
         this.price = price;
     }
 
-    public User getUser() {
+    public Member getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Member user) {
         this.user = user;
     }
        
