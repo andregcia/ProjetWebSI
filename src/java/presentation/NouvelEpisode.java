@@ -1,9 +1,12 @@
 package presentation;
 
+import boundary.Courses;
 import boundary.Episodes;
+import entity.Cours;
 import entity.Episode;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -14,6 +17,8 @@ public class NouvelEpisode {
     @Inject
     Episodes episodes; // Créer une nouvelle instance sans faire de new
     private Episode episode; 
+    private int infoCours;
+    private Courses c;
     
     @PostConstruct
     public void onInit(){
@@ -35,12 +40,18 @@ public class NouvelEpisode {
     public void setEpisode(Episode episode) {
         this.episode = episode;
     }
+
+    public int getInfoCours() {
+        return infoCours;
+    }
+
+    public void setInfoCours(int infoCours) {
+        this.infoCours = infoCours;
+    }
     
     public String doAjouter(){
         episode = episodes.enregistre(episode);
-        //Si on veut ajouter un nouvel episoe 
-        //return "nouveauEpisode.xhtml?faces-redirect=true";
-        //Sinon on renvoie la liste 
+        
         return "listeCourses.xhtml?faces-redirect=true";
     }
     

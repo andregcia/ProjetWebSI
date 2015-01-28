@@ -10,7 +10,7 @@
     </head>
     <body>
         <f:metadata>
-            <f:event listener="#{loginBean.verificationAdmin}" type="preRenderView"/>
+            <f:event listener="#{connectBean.verificationAdmin}" type="preRenderView"/>
         </f:metadata>
         <ui:composition	template="/WEB-INF/includes/template.xhtml">
             <!-- partie	"htmlHead" du template remplacée par le	fragment suivant -->
@@ -21,12 +21,15 @@
             <!-- partie	"navigation" du template remplacée par le fragment suivant -->
             <ui:define name="navigation">
                 <h:commandLink action="index?faces-redirect=true&amp;includeViewParams=true" value="Accueil" />
-                <h:commandLink action="listeCours?faces-redirect=true&amp;includeViewParams=true" value="Cours en ligne" />
+                <h:commandLink action="listeCours?faces-redirect=true&amp;includeViewParams=true" value="Liste des cours" />
                 <h:commandLink action="nouveauCours?faces-redirect=true&amp;includeViewParams=true" value="Ajouter cours" />
+                <h:commandLink action="#{connectBean.deconnexion}" value="Déconnexion" />
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
                 <h:outputText value="Bonjour,"/>
+                <br/>
+                <br/>
                 <h:outputText value="vous êtes dans l'espace administration."/>
             </ui:define>
         </ui:composition>

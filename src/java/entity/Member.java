@@ -20,7 +20,7 @@ public class Member implements Serializable {
     private String lastName;
     private String email;
     private String userName;
-    private int scan;
+    private boolean scan;
     private String password;
     @ManyToMany
     private List<Cours> listCours;
@@ -33,11 +33,9 @@ public class Member implements Serializable {
         this.lastName = lastName;
         this.email = email;
         this.userName = userName;
-        this.scan = 0;
+        this.scan = false;
         this.password = password;
     }
-
-    
 
     public String getFirstName() {
         return firstName;
@@ -63,11 +61,11 @@ public class Member implements Serializable {
         this.email = email;
     }
 
-    public int getScan() {
+    public boolean getScan() {
         return scan;
     }
 
-    public void setScan(int scan) {
+    public void setScan(boolean scan) {
         this.scan = scan;
     }
 

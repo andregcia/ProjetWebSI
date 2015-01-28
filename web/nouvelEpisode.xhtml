@@ -24,14 +24,18 @@
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
                 <h1>Ajout d'un épisode</h1>
+                    <h:outputText value="Cours n°"/>
+                    <h:outputText value="#{nouvelEpisode.infoCours}"/>
                     <h:form id="newForm">
                         <h:panelGrid columns="2">
-                            <h:outputLabel value="Titre du cours : "/>
+                            <h:outputLabel value=""/>
+                            <h:inputHidden value="#{nouvelEpisode.infoCours}"/>
+                            <h:outputLabel value="Titre de l'épisode : "/>
                             <h:inputText value="#{nouvelEpisode.episode.title}"/>
                             <h:outputLabel value="Lien Youtube :"/>
-                            <h:inputTextarea value="#{nouvelEpisode.episode.url}"/>
+                            <h:inputText value="#{nouvelEpisode.episode.url}"/>
                         </h:panelGrid>
-                        <h:commandButton value="Ajouter un épisode" action="#{nouvelEpisode.doAjouter}"/>
+                        <h:commandButton value="Ajouter un épisode" action="#{nouvelEpisode.doAjouterOther}"/>
                         <h:commandButton value="Terminer" action="#{nouveauEpisode.doAjouter}"/>
                     </h:form>
                 <hr/>

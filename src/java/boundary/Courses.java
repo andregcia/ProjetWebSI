@@ -16,7 +16,7 @@ public class Courses {
         return cours;
     }
     
-    public Cours find(long cId){
+    public Cours find(int cId){
         return this.emCours.find(Cours.class, cId);
     }
     

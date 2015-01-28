@@ -37,13 +37,6 @@ public class Cours implements Serializable {
         this.price = price;
     }
     
-    public int getIdCours() {
-        return idcours;
-    }
-
-    public void setIdCours(int id) {
-        this.idcours = id;
-    }
 
     public String getTitle() {
         return title;
