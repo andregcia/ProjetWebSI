@@ -9,7 +9,7 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <head>
-        <title>Nouvelle inscription</title>
+        <title>Inscription</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
@@ -17,12 +17,12 @@ and open the template in the editor.
             <!-- partie	"htmlHead" du template remplacée par le	fragment suivant -->
             <ui:define name="htmlHead">
                 <meta name="description" content="La page d’accueil"/>
-                <title>Nouvelle inscription</title>
+                <title>Inscription</title>
             </ui:define>
             <!-- partie	"navigation" du template remplacée par le fragment suivant -->
             <ui:define name="navigation">
                 <h:commandLink action="index?faces-redirect=true&amp;includeViewParams=true" value="Accueil" />
-                <h:commandLink styleClass="selected" value="nouvelleInscription" />
+                <h:commandLink styleClass="selected" value="Inscription" />
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
@@ -35,9 +35,7 @@ and open the template in the editor.
                         <h:outputLabel value="Email : "/>
                         <h:inputText value="#{nouvelleInscription.member.email}"/>
                         <h:outputLabel value="Identifiant : "/>
-                        <h:inputText value="#{nouvelleInscription.member.userName}"/>
-                        <h:outputLabel value="Mot de passe : "/>
-                        <h:inputText value="#{nouvelleInscription.member.password}"/>    
+                        <h:inputText value="#{nouvelleInscription.member.userName}"/>    
                         <h:commandButton value="Ajouter" action="#{nouvelleInscription.doAjouter}"/>
                     </h:panelGrid>
                 </h:form>

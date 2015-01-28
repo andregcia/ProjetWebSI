@@ -26,7 +26,7 @@ public class Members {
         return member;
     }
     
-    public Member find(int insId) {
+    public Member find(long insId) {
         return this.emMember.find(Member.class, insId);
     }
     
