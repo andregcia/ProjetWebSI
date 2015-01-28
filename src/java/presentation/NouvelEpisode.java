@@ -2,11 +2,8 @@ package presentation;
 
 import boundary.Courses;
 import boundary.Episodes;
-import entity.Cours;
 import entity.Episode;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
