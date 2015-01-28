@@ -10,6 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 
 @Entity
+
 @NamedQuery(name="findAllMembers", query="SELECT i FROM Member i")
 public class Member implements Serializable {
     
@@ -20,7 +21,7 @@ public class Member implements Serializable {
     private String lastName;
     private String email;
     private String userName;
-    private boolean scan;
+    private int scan;
     private String password;
     @ManyToMany
     private List<Cours> listCours;
@@ -33,7 +34,7 @@ public class Member implements Serializable {
         this.lastName = lastName;
         this.email = email;
         this.userName = userName;
-        this.scan = false;
+        this.scan = 0;
         this.password = password;
     }
 
@@ -61,11 +62,19 @@ public class Member implements Serializable {
         this.email = email;
     }
 
-    public boolean getScan() {
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+    
+    public int getScan() {
         return scan;
     }
 
-    public void setScan(boolean scan) {
+    public void setScan(int scan) {
         this.scan = scan;
     }
 
@@ -92,14 +101,4 @@ public class Member implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-    
-    
 }

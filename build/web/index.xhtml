@@ -20,22 +20,23 @@
                 <h:outputText styleClass="selected" value="Accueil" />
                 <h:panelGroup rendered="#{empty connectBean.username}">
                 <h:commandLink action="connect?faces-redirect=true&amp;includeViewParams=true" value="Connexion" />
+
                 </h:panelGroup>
                 <h:panelGroup rendered="#{not empty connectBean.username}">
                 <h:commandLink action="monProfil?faces-redirect=true&amp;includeViewParams=true" value="Mon profil" />
                 <h:commandLink action="#{connectBean.deconnexion}" value="Déconnexion" />
                 </h:panelGroup>
+
+                <h:commandLink action="nouvelleInscription?faces-redirect=true&amp;includeViewParams=true" value="Inscription" />
+
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
                 <br/>
                 <br/>
                 <h:outputText styleClass="bloc1ac" value="Les cours MIAGic est une plateforme qui fonctionne en partenariat avec les plus grandes universités et organisations mondiales, pour offrir des cours en ligne accessibles à tous et gratuits."/>
-                <br/>
-                <br/>
-                <h:outputText styleClass="bloc1ac" value="Choisissez parmi des centainnes de cours créés par les plus grandes institutions éducationnelles du monde. Les cours sont ouvert à tous, et sont gratuits."/>
-                <br/>
-                <br/>
+                <br/><center><h:graphicImage styleClass="imageIndex" alt="Miagic" width="600px" url="Images/tableau_profs.png"/></center><br/>
+                <h:outputText styleClass="bloc1ac" value="Choisissez parmi des centaines de cours créés par les plus grandes institutions éducationnelles du monde. Les cours sont ouvert à tous, et sont gratuits."/>
             </ui:define>
         </ui:composition>
     </body>

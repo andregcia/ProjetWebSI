@@ -26,7 +26,7 @@ public class Cours implements Serializable {
     private List<Episode> listEpisode;
     @ManyToMany(cascade=CascadeType.ALL,mappedBy="listCours")
     private List<Member> listuser;
-
+    
     public Cours() {
     }
 
