@@ -18,31 +18,22 @@
             <!-- partie	"navigation" du template remplacée par le fragment suivant -->
             <ui:define name="navigation">
                 <h:commandLink action="index?faces-redirect=true&amp;includeViewParams=true" value="Accueil" />
-                <h:commandLink styleClass="selected" value="Liste des cours" />
-                 <h:commandLink action="nouveauCours?faces-redirect=true&amp;includeViewParams=true" value="Ajouter cours" />
+                <h:commandLink styleClass="selected" value="Cours en ligne" />
                 <h:commandLink action="#{connectBean.deconnexion}" value="Déconnexion" />
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
-                <p:button outcome="nouveauCours.xhtml" value="Ajouter un cours"/>
                 <p:dataTable value="#{listeCours.liste}" var="l">
-                    <p:column headerText="id">
-                        <h:outputText value="#{l.idcours}"/>
-                    </p:column>
-                    <p:column headerText="Cours">
-                        <h:outputText value="#{l.title}"/>
-                    </p:column>
-                    <p:column headerText="Description">
-                        <h:outputText value="#{l.description}"/>
-                    </p:column>
-                    <p:column headerText="Prix">
-                        <h:outputText value="#{l.price}"/>
-                    </p:column>
-                    <p:column headerText="Options">
-                        <h:commandLink action="modifierCours?faces-redirect=true&amp;includeViewParams=true" value="Modifier le cours" />
-                        <br/>
-                        <h:commandLink action="nouvelEpisode?faces-redirect=true&amp;includeViewParams=true" value="Ajouter un épisode" />   
-                    </p:column>
+                        <p:column headerText="Cours">
+                            <h:outputText value="#{l.title}"/>
+                        </p:column>
+                        <p:column headerText="Description">
+                            <h:outputText value="#{l.description}"/>
+                        </p:column>
+                        <p:column headerText="Prix">
+                            <h:outputText value="#{l.price}"/>
+                            <h:commandButton  value="Acheter" action="#"/>
+                        </p:column>
                     </p:dataTable>  
             </ui:define>
         </ui:composition>

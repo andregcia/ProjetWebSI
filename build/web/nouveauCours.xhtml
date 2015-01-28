@@ -31,12 +31,11 @@
                             <h:outputLabel value="Description :"/>
                             <h:inputTextarea value="#{nouveauCours.cours.description}"/>
                             <h:outputLabel value="Image du cours : " />
-                            <h:inputText value="#{nouveauCours.cours.picture}"/>
+                            <h:inputFile value="#{nouveauCours.cours.picture}"/>
                             <h:outputLabel value="Prix : "/>
                             <h:inputText value="#{nouveauCours.cours.price}"/>
                         </h:panelGrid>
-                        <h:commandButton value="Next" action="#{nouveauCours.doAjouter}" id="msgError"/>
-                        <h:message for="msgError" styleClass="msgError"/>
+                        <h:commandButton value="Next" action="#{nouveauCours.doAjouter}"/>
                     </h:form>
                 <hr/>
             </ui:define>

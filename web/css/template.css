@@ -72,8 +72,7 @@
 }
 
 .bloc1ac{
-    display:bloc;
-    width:70%;
+
     color:#333333;
     font-size: 20px;
 }
@@ -100,8 +99,14 @@ input{
 textarea{
     border:1px solid #7FC6BC;
     margin-bottom: 5px;
+<<<<<<< HEAD
     height: 135px;
     width: 400px;
     max-height: 435px;
     max-width: 450px;
 }
+=======
+}
+
+
+>>>>>>> parent of f8e9322... changement pied de page

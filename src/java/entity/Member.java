@@ -38,6 +38,8 @@ public class Member implements Serializable {
         this.password = password;
     }
 
+    
+
     public String getFirstName() {
         return firstName;
     }
@@ -62,6 +64,7 @@ public class Member implements Serializable {
         this.email = email;
     }
 
+<<<<<<< HEAD
     public String getUserName() {
         return userName;
     }
@@ -70,6 +73,8 @@ public class Member implements Serializable {
         this.userName = userName;
     }
     
+=======
+>>>>>>> parent of f8e9322... changement pied de page
     public int getScan() {
         return scan;
     }

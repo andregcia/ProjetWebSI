@@ -2,6 +2,7 @@ package presentation;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,7 +12,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import static security.Encodage.hash;
 
 @Named
 @SessionScoped
@@ -46,7 +46,7 @@ public class ConnectBean implements Serializable {
             FacesMessage m = new FacesMessage("Au moins un des champs est vide !");
             FacesContext.getCurrentInstance().addMessage("connexionForm:msgLogin", m);  
         }
-        if(username.length() < 3 && username.length() > 30|| password.length() < 5){
+        if(username.length() < 3 && username.length() > 30|| password.length() < 3){
             FacesMessage m = new FacesMessage("Votre nom d'utilisateur ou votre mot de passe est trop court ou trop long.");
             FacesContext.getCurrentInstance().addMessage("connexionForm:msgLogin", m);  
         }
@@ -70,12 +70,9 @@ public class ConnectBean implements Serializable {
             ResultSet rs = pS.executeQuery();
             rs.next();
             String p = rs.getString(1);
-            rs.close();
-            pS.close();
-            connection.close();
             return p;
         }catch (SQLException e){
-            FacesMessage m = new FacesMessage("Problème d'identification !");
+            FacesMessage m = new FacesMessage("Problème d'identification !"+e);
             FacesContext.getCurrentInstance().addMessage("connexionForm:msgLogin", m);
             return null;
         }
@@ -87,27 +84,38 @@ public class ConnectBean implements Serializable {
             String sql = "SELECT username FROM Member WHERE username= ?";
             PreparedStatement pS = connection.prepareStatement(sql);
             pS.setString(1, u);
-            pS.close();
-            connection.close();
             return pS.execute();
         }catch (SQLException e){
-            FacesMessage m = new FacesMessage("Problème d'identification !");
+            FacesMessage m = new FacesMessage("Problème d'identification !"+e);
             FacesContext.getCurrentInstance().addMessage("connexionForm:msgLogin", m);
             return false;
         }
     }
-
     
-    public boolean verificationLogin() {
-        if(username.isEmpty()){
-            return false;
-        }else{
-            return true;
+    public static String hash(String base){
+        try{
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(base.getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+
+        return hexString.toString();
+        } catch(Exception ex){
+           throw new RuntimeException(ex);
         }
     }
-    public boolean verificationAdmin() {
-        return true;
+    
+    /*public boolean verificationLogin() {
+        FacesContext.getCurrentInstance().getExternalContext().getContextName().
     }
+    public void verificationAdmin()) {
+        
+    }*/
     public void deconnexion() throws IOException{
         FacesMessage m = new FacesMessage("Vous êtes déconnecté :)");
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();

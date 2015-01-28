@@ -21,14 +21,12 @@
             <!-- partie	"navigation" du template remplacée par le fragment suivant -->
             <ui:define name="navigation">
                 <h:outputText styleClass="selected" value="Accueil" />
-                <h:commandLink action="listeCourses?faces-redirect=true&amp;includeViewParams=true" value="Liste des cours" />
+                <h:commandLink action="listeCours?faces-redirect=true&amp;includeViewParams=true" value="Les Cours" />
                 <h:commandLink action="#{connectBean.deconnexion}" value="Déconnexion" id="msgLogin"/>
                 <h:commandLink action="admin?faces-redirect=true&amp;includeViewParams=true" value="Administration" />
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
-                <h:outputText value="Bonjour #{connectBean.username},"/>
-                <br/>
                 <h:form>
                     <p:dataTable value="#{listeCours.liste}" var="l">
                         <p:column headerText="Cours">
