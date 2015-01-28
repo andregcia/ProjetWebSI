@@ -19,11 +19,13 @@
             <ui:define name="navigation">
                 <h:outputText styleClass="selected" value="Accueil" />
                 <h:commandLink action="connect?faces-redirect=true&amp;includeViewParams=true" value="Connexion" />
+                <h:commandLink action="nouvelleInscription?faces-redirect=true&amp;includeViewParams=true" value="Inscription" />
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
                 <h:outputText styleClass="bloc1ac" value="Les cours MIAGic est une plateforme qui fonctionne en partenariat avec les plus grandes universités et organisations mondiales, pour offrir des cours en ligne accessibles à tous et gratuits."/>
-                <h:outputText styleClass="bloc2ac" value="Choisissez parmi des centainnes de cours créés par les plus grandes institutions éducationnelles du monde. Les cours sont ouvert à tous, et sont gratuits."/>
+                <br/><center><h:graphicImage styleClass="imageIndex" alt="Miagic" width="600px" url="Images/tableau_profs.png"/></center><br/>
+                <h:outputText styleClass="bloc2ac" value="Choisissez parmi des centaines de cours créés par les plus grandes institutions éducationnelles du monde. Les cours sont ouvert à tous, et sont gratuits."/>
             </ui:define>
         </ui:composition>
     </body>

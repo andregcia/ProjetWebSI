@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>Nouvelle inscription</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <ui:composition template="/WEB-INF/includes/template.xhtml">
+            <!-- partie	"htmlHead" du template remplacée par le	fragment suivant -->
+            <ui:define name="htmlHead">
+                <meta name="description" content="La page d’accueil"/>
+                <title>Nouvelle inscription</title>
+            </ui:define>
+            <!-- partie	"navigation" du template remplacée par le fragment suivant -->
+            <ui:define name="navigation">
+                <h:commandLink action="index?faces-redirect=true&amp;includeViewParams=true" value="Accueil" />
+                <h:commandLink styleClass="selected" value="nouvelleInscription" />
+            </ui:define>
+            <!-- partie	"main" du template remplacée par le fragment suivant -->
+            <ui:define name="main">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Prénom : "/>
+                        <h:inputText value="#{nouvelleInscription.member.firstName}"/>
+                        <h:outputLabel value="Nom : "/>
+                        <h:inputText value="#{nouvelleInscription.member.lastName}"/>
+                        <h:outputLabel value="Email : "/>
+                        <h:inputText value="#{nouvelleInscription.member.email}"/>
+                        <h:outputLabel value="Identifiant : "/>
+                        <h:inputText value="#{nouvelleInscription.member.userName}"/>
+                        <h:outputLabel value="Mot de passe : "/>
+                        <h:inputText value="#{nouvelleInscription.member.password}"/>    
+                        <h:commandButton value="Ajouter" action="#{nouvelleInscription.doAjouter}"/>
+                    </h:panelGrid>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

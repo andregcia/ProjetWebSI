@@ -47,7 +47,7 @@ public class NouvelleInscription {
 
     public String doAjouter() {
         member = members.enregistre(member);
-        return "listeMembers.xhtml?faces-redirect=true";
+        return "index.xhtml?faces-redirect=true";
     }
-    
+   
 }
