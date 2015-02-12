@@ -1,19 +1,32 @@
+body{
+    display:block;
+    width:90%;
+    margin:auto;
+}
 .entete{
-    background-color:#EDF7F2;
-    height:10%;
-    width:100%;
-    padding-top:20px;
-    text-align: center;
+   background-image: url(../img/haut.jpg);
+    background-repeat: no-repeat;
+    height: 190px;
+    width: 94%;
+    padding-top: 10px;
+    padding-left: 65px;
     font-size: 30px;
+    font-weight:bold;
+    border-bottom: 1px solid #333333;
+    margin-left: auto;
+    margin-right: auto;
+    background-position-x: 53px;
 }
 .piedpage{
     background-color:#EDF7F2;
-    height:5%;
+    height:30px;
     text-align: center;
     width:100%;
 }
 .main{
     display:inline;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .middle-table{
     border-width:0px;	
@@ -24,12 +37,24 @@
     vertical-align:top;
 }
 .nav-col{
-    background-color:#7FC6BC;
-    width:20%;
+    background-color:beige;
+    //border-radius: 10px;
+    border-right: 1px solid #333333;
+    width:12%;
+}
+.nav-col hr{
+    width: 85%;
+    border:1px solid #333333;
+}
+.nav-col a:hover{
+    color:#333333;
+    margin-left: 5px;
 }
 
 .main-col{
     width:70%;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 .nav-col a{
     display:list-item;	
@@ -99,17 +124,45 @@ input{
 textarea{
     border:1px solid #7FC6BC;
     margin-bottom: 5px;
-<<<<<<< HEAD
     height: 135px;
     width: 400px;
     max-height: 435px;
     max-width: 450px;
 }
-=======
+.imageIndex{
+    float:left;
+    
 }
 
+.imgOption{
+    margin-left: 5px;
+    margin-right: 5px;
+    height: 10%;
+}
+#imgCours{
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    width: 300px;
+    float:left;
+}
 
-<<<<<<< HEAD
->>>>>>> parent of f8e9322... changement pied de page
-=======
->>>>>>> parent of 40e3b09... Image Accueil
+.desc{
+    border-left: 2px slategrey solid;
+    float: left;
+    display: inline-block;
+    margin-left: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
+    height: 235px;
+    width: 50%;
+}
+
+.titleEpisode{
+    margin-left:10px;
+    margin-bottom:10px;
+    color:#333333;
+    font-size: 20px;
+    font-weight:bold;
+}

@@ -15,24 +15,37 @@
             </ui:define>
             <!-- partie	"navigation" du template remplacée par le fragment suivant -->
             <ui:define name="navigation">
-                <h:commandLink action="index?faces-redirect=true&amp;includeViewParams=true" value="Accueil" />
-                <h:commandLink styleClass="selected" value="Connexion" />
+                <h:outputText styleClass="selected" value="Accueil" />
+                <hr/>
+                <h:panelGroup rendered="#{empty connect.member.userName}">
+                <h:outputText styleClass="selected" value="Connexion" />
+                <h:commandLink action="nouvelleInscription?faces-redirect=true&amp;includeViewParams=true" value="Inscription" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{not empty connect.member.userName}">
+                <h:commandLink action="monProfil?faces-redirect=true&amp;includeViewParams=true" value="Mon profil" />
+                <h:commandLink action="#{connect.deconnexion()}" value="Déconnexion" />
+                </h:panelGroup>
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
-                <h:form id="connexionForm">
-                    <h:message for="msgLogin" styleClass="msgError"/>
-                    <h:panelGrid columns="3">
-                        <h:outputText value="Utilisateur"/>
-                        <h:inputText value="#{connectBean.username}" styleClass="champ"/>
-                        <h:outputText value=""/>
-                        <h:outputText value="Mot de passe"/>
-                        <h:inputSecret value="#{connectBean.password}" styleClass="champ"/>
-                        <h:outputText value=""/>
-                        <h:outputText value=""/>
-                        <h:commandButton action="#{connectBean.checkLogin}" value="Connexion" id="msgLogin"/>
-                    </h:panelGrid>
-                </h:form>
+                <h:panelGroup rendered="#{empty connect.member.userName}">
+                    <h:form id="connexionForm">
+                        <h:message for="msgLogin" styleClass="msgError"/>
+                        <h:panelGrid columns="3">
+                            <h:outputText value="Utilisateur"/>
+                            <h:inputText value="#{connect.member.userName}" styleClass="champ"/>
+                            <h:outputText value=""/>
+                            <h:outputText value="Mot de passe"/>
+                            <h:inputSecret value="#{connect.member.password}" styleClass="champ"/>
+                            <h:outputText value=""/>
+                            <h:outputText value=""/>
+                            <h:commandButton action="#{connect.checkLogin}" value="Connexion" id="msgLogin"/>
+                        </h:panelGrid>
+                    </h:form>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{not empty connect.member.userName}">
+                    <h:outputText value="Vous êtes déjà connecté :)" />
+                </h:panelGroup>
             </ui:define>
         </ui:composition>
     </body>

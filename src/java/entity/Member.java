@@ -2,9 +2,9 @@ package entity;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
@@ -15,7 +15,7 @@ import javax.persistence.NamedQuery;
 public class Member implements Serializable {
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
     private int id;
     private String firstName;
     private String lastName;
@@ -38,7 +38,13 @@ public class Member implements Serializable {
         this.password = password;
     }
 
-    
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -64,17 +70,6 @@ public class Member implements Serializable {
         this.email = email;
     }
 
-<<<<<<< HEAD
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-    
-=======
->>>>>>> parent of f8e9322... changement pied de page
     public int getScan() {
         return scan;
     }

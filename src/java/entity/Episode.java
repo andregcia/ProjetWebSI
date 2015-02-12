@@ -1,36 +1,38 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.Temporal;
 
 @Entity
-@NamedQuery(name="findAllEpisodes", query="SELECT i FROM Episode i")
+@NamedQuery(name="findAllEpisodesByIdCours", query="SELECT i FROM Episode i WHERE i.cours.idcours = :idcours")
 public class Episode implements Serializable {
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
     private int idepisode;
     private String title;
     private String url;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateVu;
     @ManyToOne(optional = false)
     private Cours cours;
 
     public Episode() {
     }
 
-    public Episode(String title, String url) {
+    public Episode(String title, String url, Cours c) {
         this.title = title;
         this.url = url;
-        this.dateVu = null;
+        this.cours = c;
     }
+
+    public Episode(Cours cours) {
+        this.cours = cours;
+    }
+    
 
     public int getIdepisode() {
         return idepisode;
@@ -38,14 +40,6 @@ public class Episode implements Serializable {
 
     public void setIdepisode(int idepisode) {
         this.idepisode = idepisode;
-    }
-
-    public Date getDateVu() {
-        return dateVu;
-    }
-
-    public void setDateVu(Date dateVu) {
-        this.dateVu = dateVu;
     }
 
     public Cours getCours() {

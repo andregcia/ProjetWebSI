@@ -10,7 +10,7 @@
     </head>
     <body>
         <f:metadata>
-            <f:event listener="#{connectBean.verificationLogin}" type="preRenderView"/>
+            <f:event listener="#{connect.verificationLogin}" type="preRenderView"/>
         </f:metadata>
         <ui:composition	template="/WEB-INF/includes/template.xhtml">
             <!-- partie	"htmlHead" du template remplacée par le	fragment suivant -->
@@ -21,25 +21,43 @@
             <!-- partie	"navigation" du template remplacée par le fragment suivant -->
             <ui:define name="navigation">
                 <h:outputText styleClass="selected" value="Accueil" />
-                <h:commandLink action="listeCours?faces-redirect=true&amp;includeViewParams=true" value="Les Cours" />
-                <h:commandLink action="#{connectBean.deconnexion}" value="Déconnexion" id="msgLogin"/>
+                <hr/>
+                <h:commandLink action="listeCourses?faces-redirect=true&amp;includeViewParams=true" value="Les Cours" />
+                <h:commandLink action="#{connect.deconnexion}" value="Déconnexion" id="msgLogin"/>
+                <hr/>
                 <h:commandLink action="admin?faces-redirect=true&amp;includeViewParams=true" value="Administration" />
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
-                <h:form>
-                    <p:dataTable value="#{listeCours.liste}" var="l">
-                        <p:column headerText="Cours">
-                            <h:outputText value="#{l.title}"/>
-                        </p:column>
-                        <p:column headerText="Description">
-                            <h:outputText value="#{l.description}"/>
-                        </p:column>
-                        <p:column headerText="Prix">
-                            <h:outputText value="#{l.price}"/>
-                        </p:column>
-                    </p:dataTable>
-                </h:form>
+                <h1>Je suis...</h1>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Nom : "/>
+                    <h:outputText value="#{connect.member.lastName}"/>
+                    <h:outputText value="Prénom : "/>
+                    <h:outputText value="#{connect.member.firstName}"/>
+                    <h:outputText value="E-mail : "/>
+                    <h:outputText value="#{connect.member.email}"/>
+                    <h:outputText value="Nom d'utilisateur : "/>
+                    <h:outputText value="#{connect.member.userName}"/>
+                    <h:outputText value=""/>
+                    <p:commandButton  action="#{gestionMembre.gotoModif(connect.member.id)}" value="Modifier informations"/>
+                </h:panelGrid>
+                <h1>Mes cours</h1>
+                <p:dataTable value="#{listeCours.accesOk(listeCours.liste,connect.member)}" var="l">
+                    <p:column headerText="Cours">
+                        <h:outputText value="#{l.title}"/>
+                    </p:column>
+                    <p:column headerText="Description">
+                        <h:outputText value="#{l.description}"/>
+                    </p:column>
+                    <p:column headerText="Prix">
+                        <h:outputText value="#{l.price} €"/>
+                    </p:column>
+                    <p:column headerText="Episode">
+                        <p:commandLink  action="#{listeCours.gotoListEpisode(l)}" value="Voir épisodes (#{listeCours.courses.nbEpisode(l.idcours)})"/>
+                    </p:column>
+                </p:dataTable>
+                
             </ui:define>
         </ui:composition>
     </body>

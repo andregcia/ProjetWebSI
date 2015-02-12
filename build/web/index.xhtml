@@ -18,36 +18,22 @@
             <!-- partie	"navigation" du template remplacée par le fragment suivant -->
             <ui:define name="navigation">
                 <h:outputText styleClass="selected" value="Accueil" />
+                <hr/>
+                <h:panelGroup rendered="#{empty connect.member.userName}">
                 <h:commandLink action="connect?faces-redirect=true&amp;includeViewParams=true" value="Connexion" />
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-                </h:panelGroup>
-                <h:panelGroup rendered="#{not empty connectBean.username}">
-                <h:commandLink action="monProfil?faces-redirect=true&amp;includeViewParams=true" value="Mon profil" />
-                <h:commandLink action="#{connectBean.deconnexion}" value="Déconnexion" />
-                </h:panelGroup>
-
                 <h:commandLink action="nouvelleInscription?faces-redirect=true&amp;includeViewParams=true" value="Inscription" />
-
-=======
->>>>>>> parent of f8e9322... changement pied de page
-=======
->>>>>>> parent of 40e3b09... Image Accueil
+                </h:panelGroup>
+                <h:panelGroup rendered="#{not empty connect.member.userName}">
+                <h:commandLink action="monProfil?faces-redirect=true&amp;includeViewParams=true" value="Mon profil" />
+                <h:commandLink action="#{connect.deconnexion()}" value="Déconnexion" />
+                </h:panelGroup>
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
+                <h:graphicImage styleClass="imageIndex" alt="Miagic" url="img/a1.png"/>
                 <h:outputText styleClass="bloc1ac" value="Les cours MIAGic est une plateforme qui fonctionne en partenariat avec les plus grandes universités et organisations mondiales, pour offrir des cours en ligne accessibles à tous et gratuits."/>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <br/><center><h:graphicImage styleClass="imageIndex" alt="Miagic" width="600px" url="Images/tableau_profs.png"/></center><br/>
+                <br/><br/>
                 <h:outputText styleClass="bloc1ac" value="Choisissez parmi des centaines de cours créés par les plus grandes institutions éducationnelles du monde. Les cours sont ouvert à tous, et sont gratuits."/>
-=======
-                <h:outputText styleClass="bloc2ac" value="Choisissez parmi des centainnes de cours créés par les plus grandes institutions éducationnelles du monde. Les cours sont ouvert à tous, et sont gratuits."/>
->>>>>>> parent of f8e9322... changement pied de page
-=======
-                <h:outputText styleClass="bloc2ac" value="Choisissez parmi des centainnes de cours créés par les plus grandes institutions éducationnelles du monde. Les cours sont ouvert à tous, et sont gratuits."/>
->>>>>>> parent of 40e3b09... Image Accueil
             </ui:define>
         </ui:composition>
     </body>

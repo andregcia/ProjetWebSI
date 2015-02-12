@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
@@ -16,13 +17,13 @@ import javax.persistence.OneToMany;
 public class Cours implements Serializable {
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idcours;
     private String title;
     private String description;
     private String picture;
     private int price;
-    @OneToMany(cascade=CascadeType.ALL,mappedBy="cours")
+    @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true, mappedBy="cours")
     private List<Episode> listEpisode;
     @ManyToMany(cascade=CascadeType.ALL,mappedBy="listCours")
     private List<Member> listuser;
@@ -35,14 +36,6 @@ public class Cours implements Serializable {
         this.description = description;
         this.picture = picture;
         this.price = price;
-    }
-    
-    public int getIdCours() {
-        return idcours;
-    }
-
-    public void setIdCours(int id) {
-        this.idcours = id;
     }
 
     public String getTitle() {
