@@ -2,8 +2,24 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:composition>
-        <h:commandLink action="home" value="Accueil" />
-        <h:commandLink action="cours" value="Cours" />
-        <h:commandLink action="connect" value="Se connecter" />
+        <h:commandLink action="index?faces-redirect=true&amp;includeViewParams=true" value="Accueil" />
+        <h:panelGroup rendered="#{empty connect.member.userName}">
+            <hr/>
+            <h:commandLink action="connect?faces-redirect=true&amp;includeViewParams=true" value="Connexion" />
+            <h:commandLink action="nouvelleInscription?faces-redirect=true&amp;includeViewParams=true" value="Inscription" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{not empty connect.member.userName}">
+            <h:outputText styleClass="titleSection" value="Espace membre"/>
+            <h:commandLink action="monProfil?faces-redirect=true&amp;includeViewParams=true" value="Mon profil" />
+            <h:commandLink action="listeCourses?faces-redirect=true&amp;includeViewParams=true" value="Les Cours" />
+            <h:panelGroup rendered="#{connect.member.scan == 'Administrateur'}">
+                <h:outputText styleClass="titleSection" value="Administration"/>
+                <h:commandLink action="listeCourses?faces-redirect=true&amp;includeViewParams=true" value="Cours en ligne" />
+                <h:commandLink action="nouveauCours?faces-redirect=true&amp;includeViewParams=true" value="Ajouter cours" />
+                <h:commandLink action="listeMembre?faces-redirect=true&amp;includeViewParams=true" value="Liste des Membres" />
+            </h:panelGroup>
+            <hr/>
+            <h:commandLink action="#{connect.deconnexion()}" value="Déconnexion" />
+        </h:panelGroup>
     </ui:composition>
 </html>

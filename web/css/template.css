@@ -4,7 +4,7 @@ body{
     margin:auto;
 }
 .entete{
-   background-image: url(../img/haut.jpg);
+    background-image: url(../img/haut.jpg);
     background-repeat: no-repeat;
     height: 190px;
     width: 94%;
@@ -16,6 +16,15 @@ body{
     margin-left: auto;
     margin-right: auto;
     background-position-x: 53px;
+}
+.titleSection{
+    color:#333333;
+    font-weight: bold;
+    margin-top:5px;
+    margin-bottom:2px;
+    border-bottom: 1px solid #333333;
+    display: list-item;
+    list-style-type: none;
 }
 .piedpage{
     background-color:#EDF7F2;
@@ -52,9 +61,10 @@ body{
 }
 
 .main-col{
-    width:70%;
+    display:inline-block;
     margin-top: 10px;
     margin-left: 10px;
+    margin-bottom: 10px;
 }
 .nav-col a{
     display:list-item;	
@@ -77,6 +87,7 @@ body{
 }
 
 #connexionForm{
+    display:inline-block;
     margin-top:30px;
     margin-left:30px;
     margin-bottom: 20px;
@@ -97,11 +108,20 @@ body{
 }
 
 .bloc1ac{
-
     color:#333333;
     font-size: 20px;
+    display: inline-block;
+    margin-left: 15%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding:10px;
+    text-align:justify;
+    width: 70%;
+    background-color:cornsilk;
+    border:1px solid #cccccc; 
 }
 #newForm{
+    display:inline-block;
     margin-top:30px;
     margin-left:30px;
     margin-bottom: 20px;
@@ -130,7 +150,8 @@ textarea{
     max-width: 450px;
 }
 .imageIndex{
-    float:left;
+    display: inline-block;
+    margin-left: 33%;
     
 }
 
@@ -144,7 +165,7 @@ textarea{
     margin-left: 30px;
     margin-right: 20px;
     margin-bottom: 10px;
-    width: 300px;
+    width: 230px;
     float:left;
 }
 
@@ -165,4 +186,65 @@ textarea{
     color:#333333;
     font-size: 20px;
     font-weight:bold;
+}
+#errorCo{
+    color:#333333;
+    display:inline-block;
+    margin-top: 20px;
+    margin-left: 15%;
+    margin-bottom: 20px;
+    width:70%;
+    padding:10px;
+    background-color:burlywood;
+    border:2px solid brown;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;    
+}
+#errorDroit{
+    color:#333333;
+    display:inline-block;
+    margin-top: 20px;
+    margin-left: 15%;
+    margin-bottom: 20px;
+    width:70%;
+    padding:10px;
+    background-color:burlywood;
+    border:2px solid brown;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;    
+}
+
+.gratis{
+    color:darkgreen;
+    background-color:beige;
+    margin-left: 25%;
+    margin-top: 10%;
+    display: inline-block;
+}
+
+.nogratis{
+    color:darkred;
+    background-color:beige;
+    margin-left: 35%;
+    margin-top: 10%;
+    display: inline-block;
+}
+
+.video{
+    display: inline-block;
+    float:left;
+    margin-top: 10px;
+    border: 1px solid #cccccc;
+    padding: 5px;
+    background-color: black;
+}
+.listeepisode{
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 8%;
+    float: left;
+    width: 20%;
 }

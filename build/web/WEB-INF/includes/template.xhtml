@@ -16,7 +16,9 @@
             <h:panelGroup layout="block" styleClass="nav">
                 <h:form>
                     <!-- Fragment "navigation" -->
-                    <ui:insert name="navigation" />
+                    <h:panelGroup layout="block" styleClass="navigation">
+                        <ui:include src="/WEB-INF/includes/menu.xhtml" />
+                    </h:panelGroup>
                 </h:form>
             </h:panelGroup>
             <h:panelGroup layout="block">

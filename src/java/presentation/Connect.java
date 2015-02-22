@@ -49,19 +49,22 @@ public class Connect implements Serializable {
                 member = membertemp;
                 FacesContext.getCurrentInstance().getExternalContext().redirect("monProfil.xhtml"); 
              }else{
-                FacesMessage m = new FacesMessage("La combinaison username et password n'est pas correcte");
+                this.member.setUserName(null);
+                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erreur!", "La combinaison username et password n'est pas correcte");
                 FacesContext.getCurrentInstance().addMessage("connexionForm:msgLogin", m);
              }
         }else{
-           FacesMessage m = new FacesMessage("Un des champs est vide !");
-           FacesContext.getCurrentInstance().addMessage("connexionForm:msgLogin", m);
+            this.member.setUserName(null);
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erreur!", "Un des champs est vide !");
+            FacesContext.getCurrentInstance().addMessage("connexionForm:msgLogin", m);
         }
     }
-
-    public boolean verificationLogin() {
-        return !member.getUserName().isEmpty();
-    }
     
+    public void majProfil(int idm){
+        if(idm == member.getId()){
+           this.member = members.find(idm);  
+        }
+    }
     public void deconnexion() throws IOException{
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         FacesContext.getCurrentInstance().getExternalContext().redirect("connect.xhtml");

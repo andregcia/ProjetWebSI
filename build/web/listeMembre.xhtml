@@ -9,59 +9,51 @@
         <title>Liste des membres</title>
     </head>
     <body>
-        <f:metadata>
-            <f:event listener="#{connect.verificationLogin}" type="preRenderView"/>
-        </f:metadata>
         <ui:composition	template="/WEB-INF/includes/template.xhtml">
             <!-- partie	"htmlHead" du template remplacée par le	fragment suivant -->
             <ui:define name="htmlHead">
                 <meta name="description" content="La page d’accueil"/>
                 <title>Liste des membres</title>
             </ui:define>
-            <!-- partie	"navigation" du template remplacée par le fragment suivant -->
-            <ui:define name="navigation">
-                <h:commandLink action="index?faces-redirect=true&amp;includeViewParams=true" value="Accueil" />
-                <hr/>
-                <h:panelGroup rendered="#{connect.member.scan == 1}">
-                <h:commandLink action="listeCourses?faces-redirect=true&amp;includeViewParams=true" value="Cours en ligne" />
-                <h:commandLink action="nouveauCours?faces-redirect=true&amp;includeViewParams=true" value="Ajouter cours" />
-                <hr/>
-                <h:outputText styleClass="selected" value="Liste des Membres" />
-                <hr/>
-                </h:panelGroup>
-                <h:commandLink action="#{connect.deconnexion}" value="Déconnexion" />  
-            </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
-                <h:panelGroup rendered="#{connect.member.scan == 0}">
-                    <h:outputText value="Bonjour #{connect.member.firstName},"/>
-                    <br/>
-                    <h:outputText value="Vous n'avez pas les droits nécessaire."/>
+                <h:panelGroup rendered="#{not empty connect.member.userName}">
+                    <h:panelGroup rendered="#{connect.member.scan == 'Administrateur'}">
+                        <h1>Liste des membres</h1>
+                        <p:dataTable value="#{listeMembre.liste}" var="l">
+                            <p:column headerText="Prénom">
+                                <h:outputText value="#{l.firstName}"/>
+                            </p:column>
+                            <p:column headerText="Nom">
+                                <h:outputText value="#{l.lastName}"/>
+                            </p:column>
+                            <p:column headerText="Login">
+                                <h:outputText value="#{l.userName}"/>
+                            </p:column>
+                            <p:column headerText="Droit">
+                                <h:outputText value="#{l.scan}"/>
+                            </p:column>
+                            <p:column headerText="Options">
+                                <p:commandLink action="#{gestionMembre.gotoModif}">
+                                    <f:param name="cM" value="#{l.id}"/>
+                                    <h:graphicImage styleClass="imgOption" alt="Modifier #{l.firstName}" url="img/edit.png"/>
+                                </p:commandLink>
+                                <p:commandLink action="#{gestionMembre.doSupMembre(l.id)}">
+                                    <h:graphicImage styleClass="imgOption" alt="Supprimer #{l.firstName}" url="img/sup.png"/>
+                                </p:commandLink>
+                            </p:column>
+                        </p:dataTable>  
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{connect.member.scan == 'Membre'}" id="errorDroit">
+                        <h:outputText value="Où êtes vous là ?" />
+                        <br/>
+                        <h:outputText value="Il semblerait que vous n'ayez pas les droits nécessaire :)..." />
+                    </h:panelGroup>
                 </h:panelGroup>
-                <h:panelGroup rendered="#{connect.member.scan == 1}">
-                    <p:dataTable value="#{listeMembre.liste}" var="l">
-                        <p:column headerText="Prénom">
-                            <h:outputText value="#{l.firstName}"/>
-                        </p:column>
-                        <p:column headerText="Nom">
-                            <h:outputText value="#{l.lastName}"/>
-                        </p:column>
-                        <p:column headerText="Login">
-                            <h:outputText value="#{l.userName}"/>
-                        </p:column>
-                        <p:column headerText="Droit">
-                            <h:outputText value="#{l.scan}"/>
-                        </p:column>
-                        <p:column headerText="Options">
-                            <p:commandLink action="#{gestionMembre.gotoModif}">
-                                <f:viewParam name="idm" value="#{l.id}"/>
-                                <h:graphicImage styleClass="imgOption" alt="Modifier #{l.firstName}" url="img/edit.png"/>
-                            </p:commandLink>
-                            <p:commandLink action="#{gestionMembre.doSupMembre(l.id)}">
-                                <h:graphicImage styleClass="imgOption" alt="Supprimer #{l.firstName}" url="img/sup.png"/>
-                            </p:commandLink>
-                        </p:column>
-                    </p:dataTable>  
+                <h:panelGroup rendered="#{empty connect.member.userName}" id="errorCo">
+                    <h:outputText value="Oh !" />
+                    <br/>
+                    <h:outputText value="Il semblerait que vous n'êtes pas connecté... pensez à vous connecter pour profiter pleinement de vos cours." />
                 </h:panelGroup>
             </ui:define>
         </ui:composition>

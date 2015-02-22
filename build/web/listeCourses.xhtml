@@ -15,46 +15,59 @@
                 <meta name="description" content="La page d’accueil"/>
                 <title>Liste des cours</title>
             </ui:define>
-            <!-- partie	"navigation" du template remplacée par le fragment suivant -->
-            <ui:define name="navigation">
-                <h:commandLink action="index?faces-redirect=true&amp;includeViewParams=true" value="Accueil" />
-                <hr/>
-                <h:outputText styleClass="selected" value="Cours en ligne" />
-                <h:panelGroup rendered="#{connect.member.scan == 1}">
-                <h:commandLink action="nouveauCours?faces-redirect=true&amp;includeViewParams=true" value="Ajouter cours" />
-                <hr/>
-                <h:commandLink action="listeMembre?faces-redirect=true&amp;includeViewParams=true" value="Liste des Membres" />
-                <hr/>
-                </h:panelGroup>
-                <h:commandLink action="#{connect.deconnexion}" value="Déconnexion" />  
-            </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
-                <h1>Liste des cours</h1>
-                <p:dataTable value="#{listeCours.liste}" var="c">
-                    <p:column headerText="Cours">
-                        <h:outputText value="#{c.title}"/>
-                    </p:column>
-                    <p:column headerText="Description">
-                        <h:outputText value="#{c.description}"/>
-                    </p:column>
-                    <p:column headerText="Prix">
-                        <h:outputText value="#{c.price} €"/>
-                    </p:column>
-                    <p:column headerText="Episode">
-                        <p:commandLink  action="#{listeCours.gotoListEpisode(c)}" value="Voir épisodes (#{listeCours.courses.nbEpisode(c.idcours)})"/>
-                    </p:column>
-                    <p:column headerText="Options">
-                        <h:panelGroup rendered="#{connect.member.scan == 1}">
-                            <p:commandLink action="#{listeCours.gotoAjoutEpisode(c)}">
-                            <h:graphicImage styleClass="imgOption" alt="Ajouter un épisode" url="img/plus.png"/>
+                <h:panelGroup rendered="#{not empty connect.member.userName}">
+                    <h1>Liste des cours</h1>
+                    <p:dataTable value="#{listeCours.liste}" var="c">
+                        <p:column headerText="Cours">
+                            <h:outputText value="#{c.title}"/>
+                        </p:column>
+                        <p:column headerText="Description">
+                            <h:outputText value="#{c.description}"/>
+                        </p:column>
+                        <p:column headerText="Prix">
+                            <h:panelGroup rendered="#{c.price == 0}">
+                                <h:outputText styleClass="gratis" value="Gratuit"/>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{c.price > 0}">
+                                <h:outputText styleClass="nogratis" value="#{c.price} €"/>
+                            </h:panelGroup>
+                        </p:column>
+                        <p:column headerText="Episode">
+                            <p:commandLink  action="#{viewEpisode.gotoView}" value="Voir épisodes (#{listeCours.courses.nbEpisode(c.idcours)})">
+                                <f:param name="cC" value="#{c.idcours}"/>
                             </p:commandLink>
-                            <h:graphicImage styleClass="imgOption" alt="Modifier #{c.title}" url="img/edit.png"/>
-                            <h:graphicImage styleClass="imgOption" alt="Supprimer #{c.title}" url="img/sup.png"/>
-                        </h:panelGroup>
-                        <h:graphicImage styleClass="imgOption" alt="Acheter #{c.title}" url="img/buy.png"/>
-                    </p:column>
-                </p:dataTable>  
+                        </p:column>
+                        <p:column headerText="Options">
+                            <h:panelGroup rendered="#{connect.member.scan == 'Administrateur'}">
+                                <p:commandLink action="#{nouvelEpisode.gotoAjoutEpisode()}">
+                                    <f:param name="cC" value="#{c.idcours}"/>
+                                    <h:graphicImage styleClass="imgOption" alt="Ajouter un épisode" url="img/plus.png"/>
+                                </p:commandLink>
+                                <p:commandLink action="#{modifierCours.gotoModif()}">
+                                    <f:param name="cC" value="#{c.idcours}"/>
+                                    <h:graphicImage styleClass="imgOption" alt="Modifier #{c.title}" url="img/edit.png"/>
+                                </p:commandLink>
+                                <p:commandLink action="#{listeCours.doSupCours(c.idcours)}">
+                                    <h:graphicImage styleClass="imgOption" alt="Supprimer #{c.title}" url="img/sup.png"/>
+                                </p:commandLink>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{!listeCours.accesOkB(c.idcours, connect.member.id)}">
+                                <p:commandLink action="#{paiement.gotoPaiement()}">
+                                    <f:param name="cC" value="#{c.idcours}"/>
+                                    <f:param name="cM" value="#{connect.member.id}"/>
+                                    <h:graphicImage styleClass="imgOption" alt="Acheter #{c.title}" url="img/buy.png"/>
+                                </p:commandLink>
+                            </h:panelGroup>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{empty connect.member.userName}" id="errorDroit">
+                    <h:outputText value="Oh !" />
+                    <br/>
+                    <h:outputText value="Il semblerait que vous n'êtes pas connecté... pensez à vous connecter pour profiter pleinement de vos cours." />
+                </h:panelGroup>
             </ui:define>
         </ui:composition>
     </body>

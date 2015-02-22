@@ -4,12 +4,9 @@ import boundary.Members;
 import entity.Member;
 import java.io.IOException;
 import javax.annotation.PostConstruct;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
 import javax.inject.Inject;
 import javax.inject.Named;
 import static security.Encodage.hash;
@@ -20,6 +17,8 @@ public class GestionMembre {
     
     @Inject
     Members members;
+    @Inject
+    Connect co;
     private Member member;
 
     @PostConstruct
@@ -96,19 +95,58 @@ public class GestionMembre {
     }
     
     public String gotoModif(){
-        //FacesContext.getCurrentInstance().getExternalContext().getFlash()
+        int idMembre = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("cM"));
+        this.member = members.find(idMembre);
         return "modifierProfil?faces-redirect=true&amp;includeViewParams=true";
     }
     
-    public void getParam() {
-        Flash flash =  FacesContext.getCurrentInstance().getExternalContext().getFlash();
-        //System.out.println("parametre :"+ flash.get("idmember"));
-        setMember(members.find((int) flash.get("idm")));
+    public void loadMember(){
+        this.member = members.find(this.member.getId());
     }
     
-    public void doMajProfil(int id, String nom, String prenom, String email) throws IOException{
-        System.out.println("membre :"+ id);
-        FacesContext.getCurrentInstance().getExternalContext().redirect("monProfil.xhtml");
-        
+    public void doMajProfil() throws IOException{
+        if(member.getFirstName().isEmpty() || member.getLastName().isEmpty() 
+                || member.getEmail().isEmpty()){
+            FacesMessage m = new FacesMessage("Un des champs est vide !");
+            FacesContext.getCurrentInstance().addMessage("newForm:msgError", m);
+        }else{
+            if(!validationEmail(member.getEmail())){
+                FacesMessage m = new FacesMessage("Merci de saisir une adresse mail valide.");
+                FacesContext.getCurrentInstance().addMessage("newForm:msgError", m);
+            }else{
+                Member m = members.find(this.member.getId());
+                m.setFirstName(this.member.getFirstName());
+                m.setLastName(this.member.getLastName());
+                m.setEmail(this.member.getEmail());
+                members.maj(m);
+                co.majProfil(m.getId());
+                FacesContext.getCurrentInstance().getExternalContext().redirect("monProfil.xhtml");
+            }
+        }        
+    }
+    
+    public void doMajPwd() throws IOException{
+        if(member.getPassword().isEmpty()){
+            FacesMessage m = new FacesMessage("Un des champs est vide !");
+            FacesContext.getCurrentInstance().addMessage("newForm:msgError", m);
+        }else{
+            if(!verifieMDP(member.getPassword())){
+                FacesMessage m = new FacesMessage("Le mot de passe doit être contenir au moins 6 caractères.");
+                FacesContext.getCurrentInstance().addMessage("newForm:msgError", m);
+            }else{
+                Member m = members.find(this.member.getId());
+                m.setPassword(hash(this.member.getPassword()));
+                members.maj(m);
+                FacesContext.getCurrentInstance().getExternalContext().redirect("monProfil.xhtml");
+            }
+        }        
+    }
+    
+    public void doMajScan() throws IOException{
+        Member m = members.find(this.member.getId());
+        m.setScan(this.member.getScan());
+        members.maj(m);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("listeMembre.xhtml");
+      
     }
 }

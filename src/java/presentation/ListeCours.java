@@ -1,13 +1,11 @@
 package presentation;
 
 import boundary.Courses;
-import boundary.Members;
 import entity.Cours;
 import entity.Member;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,8 +15,8 @@ public class ListeCours {
    
     @Inject
     private Courses courses;
+    private Cours cours;
     private List<Cours> liste = new ArrayList<>();
-    private Members members;
 
     public Courses getCourses() {
         return courses;
@@ -35,17 +33,7 @@ public class ListeCours {
 
     public void setListe(List<Cours> liste) {
         this.liste = liste;
-    }
-    
-    public String gotoListEpisode(Cours c) {
-        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("cours", c);
-        return "listeEpisodes?faces-redirect=true&amp;includeViewParams=true";
-    }
-    
-    public String gotoAjoutEpisode(Cours idc) {
-        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("idcours", idc);
-        return "nouvelEpisode?faces-redirect=true&amp;includeViewParams=true";
-    }
+    }    
     
     public List<Cours> accesOk(List<Cours> l,Member m){
         List<Cours> listTemp = new ArrayList<>();
@@ -57,5 +45,19 @@ public class ListeCours {
             }
         }
         return listTemp;
+    }
+    public boolean accesOkB(int idc, int idm){
+        cours = courses.find(idc);
+        for(Member m:cours.getListuser()){
+            if(m.getId() == idm){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public String doSupCours(int idc){
+        courses.supprimer(idc);
+        return "listeCourses?faces-redirect=true&amp;includeViewParams=true";
     }
 }

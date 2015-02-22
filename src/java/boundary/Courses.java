@@ -12,7 +12,8 @@ public class Courses {
     @PersistenceContext
     EntityManager emCours;
     
-    public Cours enregistre(Cours c){
+    public Cours enregistre(Cours c, String name){
+        c.setPicture(name);
         Cours cours = emCours.merge(c);
         return cours;
     }

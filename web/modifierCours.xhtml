@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>Cours en ligne</title>
+    </head>
+    <body>
+        <f:metadata>
+            <f:viewParam name="cC" value="#{modifierCours.cours.idcours}" />
+            <f:event listener="#{modifierCours.loadCours()}" type="preRenderView"/>
+        </f:metadata>
+        <ui:composition	template="/WEB-INF/includes/template.xhtml">
+            <!-- partie	"htmlHead" du template remplacée par le	fragment suivant -->
+            <ui:define name="htmlHead">
+                <meta name="description" content="La page d’accueil"/>
+                <title>Modifier le cours</title>
+            </ui:define>
+            <!-- partie	"main" du template remplacée par le fragment suivant -->
+            <ui:define name="main">
+                <h:panelGroup rendered="#{not empty connect.member.userName}">
+                    <h:panelGroup rendered="#{connect.member.scan == 'Administrateur'}">
+                        <h1>Modification du cours : #{modifierCours.cours.title}</h1>
+                        <h:form id="newForm" enctype="multipart/form-data">
+                            <h:panelGrid columns="4" >
+                                <h:outputText value="Titre du cours : "/>
+                                <h:inputText value="#{modifierCours.cours.title}"/>
+                                <h:outputText value=""/>
+                                <h:outputText value=""/>
+                                <h:outputText value="Description : "/>
+                                <p:inputTextarea value="#{modifierCours.cours.description}" id="msgDesc" counter="display" maxlength="255" counterTemplate="{0} charactères restants." autoResize="false" />
+                                <h:outputText id="display"/>
+                                <h:message for="msgDesc" styleClass="msgError" showDetail="true"/>
+                                <h:outputText value=""/>
+                                <p:fileUpload value="#{nouveauCours.file}"
+                                                label="Choisir une image" cancelLabel="Annuler"
+                                                uploadLabel="Charger l'image"
+                                                mode="simple"  
+                                                process="@this"
+                                                allowTypes="/(\.|\/)(jpe?g|png)$/" invalidFileMessage="Format accepté jpeg ou png" id="msgImg"/>
+                                <h:message for="msgImg"/>
+                                <h:outputText value=""/>
+                                <h:outputText value="Prix : "/>
+                                <h:inputText value="#{modifierCours.cours.price}" id="msgprix"/>
+                                <h:message for="msgprix" styleClass="msgError"/>
+                                <h:outputText value=""/>
+                                <h:commandButton value="Mettre à jour" action="#{modifierCours.doMajCours}" id="msgError"/>
+                                <h:message for="msgError" styleClass="msgError"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{connect.member.scan == 'Membre'}" id="errorDroit">
+                        <h:outputText value="Où êtes vous là ?" />
+                        <br/>
+                        <h:outputText value="Il semblerait que vous n'ayez pas les droits nécessaire :)..." />
+                    </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{empty connect.member.userName}" id="errorCo">
+                    <h:outputText value="Oh !" />
+                    <br/>
+                    <h:outputText value="Il semblerait que vous n'êtes pas connecté... pensez à vous connecter pour profiter pleinement de vos cours." />
+                </h:panelGroup>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
+

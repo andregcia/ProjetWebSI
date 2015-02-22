@@ -9,55 +9,53 @@
         <title>Cours en ligne</title>
     </head>
     <body>
-        <f:metadata>
-            <f:event listener="#{connect.verificationLogin}" type="preRenderView"/>
-        </f:metadata>
         <ui:composition	template="/WEB-INF/includes/template.xhtml">
             <!-- partie	"htmlHead" du template remplacée par le	fragment suivant -->
             <ui:define name="htmlHead">
                 <meta name="description" content="La page d’accueil"/>
                 <title>Mon profil</title>
             </ui:define>
-            <!-- partie	"navigation" du template remplacée par le fragment suivant -->
-            <ui:define name="navigation">
-                <h:outputText styleClass="selected" value="Accueil" />
-                <hr/>
-                <h:commandLink action="listeCourses?faces-redirect=true&amp;includeViewParams=true" value="Les Cours" />
-                <h:commandLink action="#{connect.deconnexion}" value="Déconnexion" id="msgLogin"/>
-                <hr/>
-                <h:commandLink action="admin?faces-redirect=true&amp;includeViewParams=true" value="Administration" />
-            </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
-                <h1>Je suis...</h1>
-                <h:panelGrid columns="2">
-                    <h:outputText value="Nom : "/>
-                    <h:outputText value="#{connect.member.lastName}"/>
-                    <h:outputText value="Prénom : "/>
-                    <h:outputText value="#{connect.member.firstName}"/>
-                    <h:outputText value="E-mail : "/>
-                    <h:outputText value="#{connect.member.email}"/>
-                    <h:outputText value="Nom d'utilisateur : "/>
-                    <h:outputText value="#{connect.member.userName}"/>
-                    <h:outputText value=""/>
-                    <p:commandButton  action="#{gestionMembre.gotoModif(connect.member.id)}" value="Modifier informations"/>
-                </h:panelGrid>
-                <h1>Mes cours</h1>
-                <p:dataTable value="#{listeCours.accesOk(listeCours.liste,connect.member)}" var="l">
-                    <p:column headerText="Cours">
-                        <h:outputText value="#{l.title}"/>
-                    </p:column>
-                    <p:column headerText="Description">
-                        <h:outputText value="#{l.description}"/>
-                    </p:column>
-                    <p:column headerText="Prix">
-                        <h:outputText value="#{l.price} €"/>
-                    </p:column>
-                    <p:column headerText="Episode">
-                        <p:commandLink  action="#{listeCours.gotoListEpisode(l)}" value="Voir épisodes (#{listeCours.courses.nbEpisode(l.idcours)})"/>
-                    </p:column>
-                </p:dataTable>
-                
+                <h:panelGroup rendered="#{not empty connect.member.userName}">
+                    <h1>Je suis...</h1>
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Nom : "/>
+                        <h:outputText value="#{connect.member.lastName}"/>
+                        <h:outputText value="Prénom : "/>
+                        <h:outputText value="#{connect.member.firstName}"/>
+                        <h:outputText value="E-mail : "/>
+                        <h:outputText value="#{connect.member.email}"/>
+                        <h:outputText value="Nom d'utilisateur : "/>
+                        <h:outputText value="#{connect.member.userName}"/>
+                        <h:outputText value=""/>
+                        <p:commandButton  action="#{gestionMembre.gotoModif}" value="Modifier mes informations">
+                            <f:param name="cM" value="#{connect.member.id}"/>
+                        </p:commandButton>
+                    </h:panelGrid>
+                    <h1>Mes cours</h1>
+                    <p:dataTable value="#{listeCours.accesOk(listeCours.liste,connect.member)}" var="l">
+                        <p:column headerText="Cours">
+                            <h:outputText value="#{l.title}"/>
+                        </p:column>
+                        <p:column headerText="Description">
+                            <h:outputText value="#{l.description}"/>
+                        </p:column>
+                        <p:column headerText="Prix">
+                            <h:outputText value="#{l.price} €"/>
+                        </p:column>
+                        <p:column headerText="Episode">
+                            <p:commandLink  action="#{viewEpisode.gotoView()}" value="Voir épisodes (#{listeCours.courses.nbEpisode(l.idcours)})">
+                                <f:param name="cC" value="#{l.idcours}"/>
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{empty connect.member.userName}" id="errorCo">
+                    <h:outputText value="Oh !" />
+                    <br/>
+                    <h:outputText value="Il semblerait que vous n'êtes pas connecté... pensez à vous connecter pour profiter pleinement de vos cours." />
+                </h:panelGroup>
             </ui:define>
         </ui:composition>
     </body>

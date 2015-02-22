@@ -4,11 +4,9 @@ import boundary.Courses;
 import boundary.Episodes;
 import entity.Cours;
 import entity.Episode;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -18,16 +16,27 @@ public class NouvelEpisode {
 
     @Inject
     Episodes episodes; // Créer une nouvelle instance sans faire de new
+    @Inject
+    Courses courses;
     private Episode episode; 
     private Cours cours;
     
     @PostConstruct
     public void onInit(){
         this.episode = new Episode();
+        this.cours = new Cours();
     }
 
     public Episodes getEpisodes() {
         return episodes;
+    }
+
+    public Courses getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Courses courses) {
+        this.courses = courses;
     }
     
     public void setEpisodes(Episodes episodes) {
@@ -49,21 +58,20 @@ public class NouvelEpisode {
     public void setCours(Cours cours) {
         this.cours = cours;
     }
-
-
-    public void getParam() {
-        Flash flash =  FacesContext.getCurrentInstance().getExternalContext().getFlash();
-        //System.out.println("parametre :"+ flash.get("param"));
-        setCours((Cours) flash.get("idcours"));
-
+    
+    public String gotoAjoutEpisode() {
+        int idCours = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("cC"));
+        this.cours = courses.find(idCours);
+        return "nouvelEpisode?faces-redirect=true&amp;includeViewParams=true";
+    }
+    
+    public void loadCours(){
+        this.cours = courses.find(this.cours.getIdcours());
     }
 
     public String doAjouter(){
-        episode.setCours(cours);
-        episode = episodes.enregistre(episode);
-        //List<Episode> listE = cours.getListEpisode();
-        //listE.add(episode);
-        //cours.setListEpisode(listE);
+        loadCours();
+        episodes.enregistre(episode,cours);
         return "listeCourses.xhtml?faces-redirect=true";
     }
     

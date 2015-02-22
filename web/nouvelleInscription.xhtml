@@ -7,7 +7,8 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <head>
         <title>Inscription</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -28,28 +29,35 @@ and open the template in the editor.
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
-                <h1>Inscription</h1>
-                    <h:form id="newForm">
-                    <h:panelGrid columns="3">
-                        <h:outputLabel value="Prénom : "/>
-                        <h:inputText value="#{gestionMembre.member.firstName}"/>
-                        <h:outputText value=""/>
-                        <h:outputLabel value="Nom : "/>
-                        <h:inputText value="#{gestionMembre.member.lastName}"/>
-                        <h:outputText value=""/>
-                        <h:outputLabel value="Email : "/>
-                        <h:inputText value="#{gestionMembre.member.email}" id="msgEmail"/>
-                        <h:message for="msgEmail" styleClass="msgError"/>
-                        <h:outputLabel value="Identifiant : "/>
-                        <h:inputText value="#{gestionMembre.member.userName}" id="msgLogin"/>
-                        <h:message for="msgLogin" styleClass="msgError"/>
-                        <h:outputLabel value="Mot de passe : "/>
-                        <h:inputSecret value="#{gestionMembre.member.password}"  id="msgMDP"/> 
-                        <h:message for="msgMDP" styleClass="msgError"/>
-                        <h:commandButton value="Ajouter" action="#{gestionMembre.doAjouter}" id="msgError"/>
-                        <h:message for="msgError" styleClass="msgError"/>
-                    </h:panelGrid>
-                </h:form>
+                <h:panelGroup rendered="#{empty connect.member.userName}">
+                    <h1>Inscription</h1>
+                        <h:form id="newForm">
+                        <h:panelGrid columns="3">
+                            <p:outputLabel value="Prénom : "/>
+                            <p:inputText value="#{gestionMembre.member.firstName}"/>
+                            <h:outputText value=""/>
+                            <p:outputLabel value="Nom : "/>
+                            <p:inputText value="#{gestionMembre.member.lastName}"/>
+                            <h:outputText value=""/>
+                            <p:outputLabel value="Email : "/>
+                            <p:inputText value="#{gestionMembre.member.email}" id="msgEmail"/>
+                            <h:message for="msgEmail" styleClass="msgError"/>
+                            <p:outputLabel value="Identifiant : "/>
+                            <p:inputText value="#{gestionMembre.member.userName}" id="msgLogin"/>
+                            <h:message for="msgLogin" styleClass="msgError"/>
+                            <p:outputLabel value="Mot de passe : "/>
+                            <p:password value="#{gestionMembre.member.password}"  id="msgMDP"/> 
+                            <h:message for="msgMDP" styleClass="msgError"/>
+                            <h:commandButton value="Ajouter" action="#{gestionMembre.doAjouter}" id="msgError"/>
+                            <h:message for="msgError" styleClass="msgError"/>
+                        </h:panelGrid>
+                    </h:form>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{not empty connect.member.userName}" id="errorCo">
+                    <h:outputText value="Oh !" />
+                    <br/>
+                    <h:outputText value="Il semblerait que vous êtes connecté..." />
+                </h:panelGroup>
             </ui:define>
         </ui:composition>
     </body>

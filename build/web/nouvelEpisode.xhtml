@@ -3,13 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <head>
         <title>Cours en ligne</title>
     </head>
     <body>
         <f:metadata>
-            <f:event  type="preRenderView" listener="#{nouvelEpisode.getParam}"/>
+            <f:viewParam name="cC" value="#{nouvelEpisode.cours.idcours}" />
+            <f:event listener="#{nouvelEpisode.loadCours()}" type="preRenderView"/>
         </f:metadata>
         <ui:composition	template="/WEB-INF/includes/template.xhtml">
             <!-- partie	"htmlHead" du template remplacée par le	fragment suivant -->
@@ -32,17 +34,31 @@
             </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
-                <h1>Ajout d'un épisode</h1>
-                    <h:form id="newForm">
-                        <h:outputText value="Cours : #{nouvelEpisode.cours.title}"/>
-                        <h:panelGrid columns="2">
-                            <h:outputLabel value="Titre de l'épisode : "/>
-                            <h:inputText value="#{nouvelEpisode.episode.title}"/>
-                            <h:outputLabel value="Lien Youtube :"/>
-                            <h:inputText value="#{nouvelEpisode.episode.url}"/>
-                        </h:panelGrid>
-                        <h:commandButton value="Ajouter l'épisode" action="#{nouvelEpisode.doAjouter}"/>
-                    </h:form>
+                <h:panelGroup rendered="#{not empty connect.member.userName}">
+                    <h:panelGroup rendered="#{connect.member.scan == 'Administrateur'}">
+                        <h1>Ajout d'un épisode</h1>
+                            <h:form id="newForm">
+                                <h:outputText value="Cours : #{nouvelEpisode.cours.title}"/>
+                                <h:panelGrid columns="2">
+                                    <p:outputLabel value="Titre de l'épisode : "/>
+                                    <p:inputText value="#{nouvelEpisode.episode.title}"/>
+                                    <p:outputLabel value="Lien Youtube :"/>
+                                    <p:inputText value="#{nouvelEpisode.episode.url}"/>
+                                </h:panelGrid>
+                                <h:commandButton value="Ajouter l'épisode" action="#{nouvelEpisode.doAjouter}"/>
+                            </h:form>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{connect.member.scan == 'Membre'}" id="errorDroit">
+                        <h:outputText value="Où êtes vous là ?" />
+                        <br/>
+                        <h:outputText value="Il semblerait que vous n'ayez pas les droits nécessaire :)..." />
+                    </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{empty connect.member.userName}" id="errorCo">
+                    <h:outputText value="Oh !" />
+                    <br/>
+                    <h:outputText value="Il semblerait que vous n'êtes pas connecté... pensez à vous connecter pour profiter pleinement de vos cours." />
+                </h:panelGroup>
                 <hr/>
             </ui:define>
         </ui:composition>

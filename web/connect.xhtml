@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <head>
         <title>Cours en ligne</title>
     </head>
@@ -13,38 +14,27 @@
                 <meta name="description" content="La page d’accueil"/>
                 <title>Connexion</title>
             </ui:define>
-            <!-- partie	"navigation" du template remplacée par le fragment suivant -->
-            <ui:define name="navigation">
-                <h:outputText styleClass="selected" value="Accueil" />
-                <hr/>
-                <h:panelGroup rendered="#{empty connect.member.userName}">
-                <h:outputText styleClass="selected" value="Connexion" />
-                <h:commandLink action="nouvelleInscription?faces-redirect=true&amp;includeViewParams=true" value="Inscription" />
-                </h:panelGroup>
-                <h:panelGroup rendered="#{not empty connect.member.userName}">
-                <h:commandLink action="monProfil?faces-redirect=true&amp;includeViewParams=true" value="Mon profil" />
-                <h:commandLink action="#{connect.deconnexion()}" value="Déconnexion" />
-                </h:panelGroup>
-            </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
                 <h:panelGroup rendered="#{empty connect.member.userName}">
                     <h:form id="connexionForm">
-                        <h:message for="msgLogin" styleClass="msgError"/>
+                        <p:message for="msgLogin"/>
                         <h:panelGrid columns="3">
-                            <h:outputText value="Utilisateur"/>
-                            <h:inputText value="#{connect.member.userName}" styleClass="champ"/>
+                            <p:outputLabel value="Utilisateur"/>
+                            <p:inputText value="#{connect.member.userName}" styleClass="champ"/>
                             <h:outputText value=""/>
-                            <h:outputText value="Mot de passe"/>
-                            <h:inputSecret value="#{connect.member.password}" styleClass="champ"/>
+                            <p:outputLabel value="Mot de passe"/>
+                            <p:password value="#{connect.member.password}" styleClass="champ"/>
                             <h:outputText value=""/>
                             <h:outputText value=""/>
                             <h:commandButton action="#{connect.checkLogin}" value="Connexion" id="msgLogin"/>
                         </h:panelGrid>
-                    </h:form>
+                    </h:form> 
                 </h:panelGroup>
-                <h:panelGroup rendered="#{not empty connect.member.userName}">
-                    <h:outputText value="Vous êtes déjà connecté :)" />
+                <h:panelGroup rendered="#{not empty connect.member.userName}" id="errorCo">
+                    <h:outputText value="Oh !" />
+                    <br/>
+                    <h:outputText value="Il semblerait que vous êtes connecté..." />
                 </h:panelGroup>
             </ui:define>
         </ui:composition>

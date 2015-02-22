@@ -1,23 +1,23 @@
-INSERT INTO "MEMBER" (ID,FIRSTNAME, LASTNAME, EMAIL, USERNAME, PASSWORD, SCAN) VALUES (1,'Andre', 'Garcia', 'andregcia@gmail.com', 'andregcia', 'f955f62dab66faeec663bf873962ece8c3b817d2f52e9ff88a688bf7a4e5fc16', 1);
-INSERT INTO "MEMBER" (ID,FIRSTNAME, LASTNAME, EMAIL, USERNAME, PASSWORD, SCAN) VALUES (2,'Julie', 'Helin', 'juliehelin@gmail.com', 'julie', '41028769c98b981922099851253edb9d97bd275acb124fb3d1d5c76a87ad08e2', 0);
+INSERT INTO "MEMBER" (ID,FIRSTNAME, LASTNAME, EMAIL, USERNAME, PASSWORD, SCAN) VALUES (1,'Jean', 'Superadmin', 'admin@admin.fr', 'demoadmin', '53016290e37b085a2feebeded49ce3b78f7a737ede2ff8c27a3787cfe7eaebf5', 1);
+INSERT INTO "MEMBER" (ID,FIRSTNAME, LASTNAME, EMAIL, USERNAME, PASSWORD, SCAN) VALUES (2,'Paul', 'Demo', 'demo@demo.fr', 'demo', '2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea', 0);
 
 INSERT INTO "COURS" (IDCOURS,TITLE, DESCRIPTION, PICTURE, PRICE) VALUES (1,'Java EE', 'Java Enterprise Edition, est une spécification pour la technique Java d Oracle plus particulièrement destinée aux applications d’entreprise.', '1.png', 10);
-INSERT INTO "COURS" (IDCOURS,TITLE, DESCRIPTION, PICTURE, PRICE) VALUES (2,'Securite', 'Blalalalalajfufjhdsfuyf', '2.png', 15);
-INSERT INTO "COURS" (IDCOURS,TITLE, DESCRIPTION, PICTURE, PRICE) VALUES (3,'Gestion de portefeuille', 'Blalalalalajfufjhdsfuyf', 'gestionport.jpg', 0);
+INSERT INTO "COURS" (IDCOURS,TITLE, DESCRIPTION, PICTURE, PRICE) VALUES (2,'Securite', 'La sécurité informatique est l'ensemble des moyens techniques, organisationnels, juridiques et humains nécessaires et mis en place pour conserver, rétablir, et garantir la sécurité des systèmes informatiques.', '2.png', 15);
+INSERT INTO "COURS" (IDCOURS,TITLE, DESCRIPTION, PICTURE, PRICE) VALUES (3,'Gestion de portefeuille', 'Gestion des fonds de placement d'un investisseur ou d'une institution, en vue d'en optimiser la valorisation, en effectuant des placements opportuns dans le cadre d'une stratégie politiques d'investissements déterminée au préalable.', '3.jpg', 0);
 
-INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (1,1,'Introduction','http://youtu.be/R0dogNWjqw8?list=PLHqN89yRGMyAcwWcSWk59_S_-BQVn3Rrb');
-INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (2,1,'JPA','');
-INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (3,1,'JSF','');
-INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (4,1,'EJB','');
-INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (5,1,'CDI','');
-INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (6,1,'Services REST','');
-INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (7,2,'Introduction','');
-INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (8,2,'Contrôle d accès','');
-INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (9,2,'Authentification','');
-INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (10,2,'Politique de sécurité du SI','');
-INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (11,3,'Introduction','');
-INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (12,3,'Gestion des actions','');
-INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (13,3,'Exercices','');
+INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (1,1,'Introduction','https://www.youtube.com/watch?v=R0dogNWjqw8');
+INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (2,1,'JPA','https://www.youtube.com/watch?v=R0dogNWjqw8');
+INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (3,1,'JSF','https://www.youtube.com/watch?v=R0dogNWjqw8');
+INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (4,1,'EJB','https://www.youtube.com/watch?v=R0dogNWjqw8');
+INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (5,1,'CDI','https://www.youtube.com/watch?v=R0dogNWjqw8');
+INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (6,1,'Services REST','https://www.youtube.com/watch?v=R0dogNWjqw8');
+INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (7,2,'Introduction','https://www.youtube.com/watch?v=R0dogNWjqw8');
+INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (8,2,'Contrôle d accès','https://www.youtube.com/watch?v=R0dogNWjqw8');
+INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (9,2,'Authentification','https://www.youtube.com/watch?v=R0dogNWjqw8');
+INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (10,2,'Politique de sécurité du SI','https://www.youtube.com/watch?v=R0dogNWjqw8');
+INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (11,3,'Introduction','https://www.youtube.com/watch?v=R0dogNWjqw8');
+INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (12,3,'Gestion des actions','https://www.youtube.com/watch?v=R0dogNWjqw8');
+INSERT INTO "EPISODE" (IDEPISODE,COURS_IDCOURS,TITLE,URL) VALUES (13,3,'Exercices','https://www.youtube.com/watch?v=R0dogNWjqw8');
 
 INSERT INTO "MEMBER_COURS" (LISTCOURS_IDCOURS,LISTUSER_ID) VALUES (1,1);
 INSERT INTO "MEMBER_COURS" (LISTCOURS_IDCOURS,LISTUSER_ID) VALUES (2,1);

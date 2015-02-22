@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <head>
         <title>Cours en ligne</title>
     </head>
@@ -13,41 +14,44 @@
                 <meta name="description" content="La page d’accueil"/>
                 <title>Nouveau Cours</title>
             </ui:define>
-            <!-- partie	"navigation" du template remplacée par le fragment suivant -->
-            <ui:define name="navigation">
-                <h:commandLink action="index?faces-redirect=true&amp;includeViewParams=true" value="Accueil" />
-                <hr/>
-                <h:commandLink action="listeCourses?faces-redirect=true&amp;includeViewParams=true" value="Cours en ligne" />
-                <h:panelGroup rendered="#{connect.member.scan == 1}">
-                <h:outputText styleClass="selected" value="Ajouter cours" />
-                <hr/>
-                <h:commandLink action="listeMembre?faces-redirect=true&amp;includeViewParams=true" value="Liste des Membres" />
-                <hr/>
-                </h:panelGroup>
-                <h:commandLink action="#{connect.deconnexion}" value="Déconnexion" />  
-            </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
-                <h1>Ajout d'un cours en ligne</h1>
-                    <h:form id="newForm">
-                        <h:panelGrid columns="3">
-                            <h:outputLabel value="Titre du cours : "/>
-                            <h:inputText value="#{nouveauCours.cours.title}"/>
-                            <h:outputText value=""/>
-                            <h:outputLabel value="Description :"/>
-                            <h:inputTextarea value="#{nouveauCours.cours.description}"/>
-                            <h:outputText value=""/>
-                            <h:outputLabel value="Image du cours : " />
-                            <h:inputText value="#{nouveauCours.cours.picture}"/>
-                            <h:message for="msgError" styleClass="msgError"/>
-                            <h:outputLabel value="Prix : "/>
-                            <h:inputText value="#{nouveauCours.cours.price}" id="msgPrix"/>
-                            <h:message for="msgPrix" styleClass="msgError"/>
-                        </h:panelGrid>
-                        <h:commandButton value="Ajouter" action="#{nouveauCours.doAjouter}" id="msgError"/>
-                        <h:message for="msgError" styleClass="msgError"/>
-                    </h:form>
-                <hr/>
+                <h:panelGroup rendered="#{not empty connect.member.userName}">
+                    <h:panelGroup rendered="#{connect.member.scan == 'Administrateur'}">
+                        <h1>Ajout d'un cours en ligne</h1>
+                            <h:form id="newForm" enctype="multipart/form-data">
+                                <h:panelGrid columns="3">
+                                    <p:outputLabel value="Titre du cours : "/>
+                                    <p:inputText value="#{nouveauCours.cours.title}"/>
+                                    <h:outputText value=""/>
+                                    <p:outputLabel value="Description :"/>
+                                    <p:inputTextarea value="#{nouveauCours.cours.description}" counter="display" maxlength="255" counterTemplate="{0} charactères restants." autoResize="false" />
+                                    <h:message for="msgDesc"/>
+                                    <h:outputText value=""/>
+                                    <h:outputText id="display"/>
+                                    <h:outputText value=""/>
+                                    <p:outputLabel value=""/>
+                                    <p:fileUpload value="#{nouveauCours.file}"
+                                                label="Choisir une image" cancelLabel="Annuler"
+                                                uploadLabel="Charger l'image"
+                                                mode="simple"  
+                                                process="@this"
+                                                allowTypes="/(\.|\/)(jpe?g|png)$/" invalidFileMessage="Format accepté jpeg ou png" id="msgImg"/>
+                                    <h:message for="msgImg"/>
+                                    <p:outputLabel value="Prix : "/>
+                                    <p:inputText value="#{nouveauCours.cours.price}" id="msgPrix"/>
+                                    <h:message for="msgPrix" styleClass="msgError"/>
+                                </h:panelGrid>
+                                <h:commandButton value="Ajouter" action="#{nouveauCours.doAjouter}" id="msgError"/>
+                                <h:message for="msgError"/>
+                            </h:form>
+                        </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{empty connect.member.userName}" id="errorCo">
+                    <h:outputText value="Oh !" />
+                    <br/>
+                    <h:outputText value="Il semblerait que vous n'êtes pas connecté... pensez à vous connecter pour profiter pleinement de vos cours." />
+                </h:panelGroup>
             </ui:define>
         </ui:composition>
     </body>

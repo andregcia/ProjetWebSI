@@ -11,7 +11,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-
 @Entity
 @NamedQuery(name="findAllCourses", query="SELECT i FROM Cours i")
 public class Cours implements Serializable {
@@ -23,9 +22,9 @@ public class Cours implements Serializable {
     private String description;
     private String picture;
     private int price;
-    @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true, mappedBy="cours")
+    @OneToMany(mappedBy="cours", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<Episode> listEpisode;
-    @ManyToMany(cascade=CascadeType.ALL,mappedBy="listCours")
+    @ManyToMany(mappedBy="listCours")
     private List<Member> listuser;
     
     public Cours() {

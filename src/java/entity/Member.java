@@ -15,7 +15,7 @@ import javax.persistence.NamedQuery;
 public class Member implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;
@@ -70,12 +70,20 @@ public class Member implements Serializable {
         this.email = email;
     }
 
-    public int getScan() {
-        return scan;
+    public String getScan() {
+        if(this.scan == 0){
+            return "Membre";
+        }else{
+            return "Administrateur";
+        }
     }
 
-    public void setScan(int scan) {
-        this.scan = scan;
+    public void setScan(String droit) {
+        if(droit.equals("Membre")){
+            this.scan = 0;
+        }else{
+            this.scan = 1;
+        }
     }
 
     public String getPassword() {

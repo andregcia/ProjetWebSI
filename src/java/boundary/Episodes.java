@@ -1,5 +1,6 @@
 package boundary;
 
+import entity.Cours;
 import entity.Episode;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -12,9 +13,9 @@ public class Episodes {
     @PersistenceContext
     EntityManager emEpisode;
     
-    public Episode enregistre(Episode e){
-        Episode episode = emEpisode.merge(e);
-        return episode;
+    public void enregistre(Episode e, Cours c){
+        e.setCours(c);
+        emEpisode.persist(e);
     }
     
     public void maj(Episode e){

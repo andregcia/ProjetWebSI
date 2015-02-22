@@ -10,8 +10,8 @@
     </head>
     <body>
         <f:metadata>
-            <f:event listener="#{connect.verificationLogin}" type="preRenderView"/>
-            <f:event  type="preRenderView" listener="#{gestionMembre.getParam}"/>
+            <f:viewParam name="cM" value="#{gestionMembre.member.id}" />
+            <f:event listener="#{gestionMembre.loadMember()}" type="preRenderView"/>
         </f:metadata>
         <ui:composition	template="/WEB-INF/includes/template.xhtml">
             <!-- partie	"htmlHead" du template remplacée par le	fragment suivant -->
@@ -19,44 +19,53 @@
                 <meta name="description" content="La page d’accueil"/>
                 <title>Modifier profil</title>
             </ui:define>
-            <!-- partie	"navigation" du template remplacée par le fragment suivant -->
-            <ui:define name="navigation">
-                <h:outputText styleClass="selected" value="Accueil" />
-                <hr/>
-                <h:commandLink action="listeCourses?faces-redirect=true&amp;includeViewParams=true" value="Les Cours" />
-                <h:commandLink action="#{connect.deconnexion}" value="Déconnexion" id="msgLogin"/>
-                <hr/>
-                <h:commandLink action="admin?faces-redirect=true&amp;includeViewParams=true" value="Administration" />
-            </ui:define>
             <!-- partie	"main" du template remplacée par le fragment suivant -->
             <ui:define name="main">
-                <h1>Modification de mon profil</h1>
+                <h1>Modification du profil</h1>
                 <h:form id="newForm">
                     <h:panelGrid columns="3" >
-                        <h:outputText value="Nom d'utilisateur : "/>
+                        <p:outputLabel value="Nom d'utilisateur : "/>
                         <h:outputText value="#{gestionMembre.member.userName}"/>
                         <h:outputText value=""/>
-                        <h:outputText value="Nom : "/>
-                        <h:inputText value="#{gestionMembre.member.lastName}"/>
+                        <p:outputLabel value="Nom : "/>
+                        <p:inputText value="#{gestionMembre.member.lastName}"/>
                         <h:outputText value=""/>
-                        <h:outputText value="Prénom : "/>
-                        <h:inputText value="#{gestionMembre.member.firstName}"/>
+                        <p:outputLabel value="Prénom : "/>
+                        <p:inputText value="#{gestionMembre.member.firstName}"/>
                         <h:outputText value=""/>
-                        <h:outputText value="E-mail : "/>
-                        <h:inputText value="#{gestionMembre.member.email}" id="msgEmail"/>
+                        <p:outputLabel value="E-mail : "/>
+                        <p:inputText value="#{gestionMembre.member.email}" id="msgEmail"/>
                         <h:message for="msgEmail" styleClass="msgEmail"/>
                         <h:outputText value=""/>
-                        <h:commandButton value="Mettre à jour" action="#{gestionMembre.doMajProfil(gestionMembre.member.id,gestionMembre.member.firstName,gestionMembre.member.lastName,gestionMembre.member.email)}" id="msgError"/>
+                        <h:commandButton value="Mettre à jour" action="#{gestionMembre.doMajProfil}" id="msgError"/>
                         <h:message for="msgError" styleClass="msgError"/>
                     </h:panelGrid>
                 </h:form>
                 <h1>Modification du mot de passe</h1>
-                <h:panelGrid columns="2">
-                    <h:outputText value="Mot de passe : "/>
-                    <h:inputSecret value="#{connect.member.password}"/>
-                    <h:outputText value=""/>
-                    <h:commandButton  action="monProfil?faces-redirect=true&amp;includeViewParams=true" value="Modifier Mot de passe"/>
-                </h:panelGrid>
+                <h:form id="newFormPass">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="Mot de passe : "/>
+                        <p:password value="#{gestionMembre.member.password}"/>
+                        <h:outputText value=""/>
+                        <h:commandButton value="Modifier Mot de passe" action="#{gestionMembre.doMajPwd}" id="msgError"/>
+                        <h:message for="msgError" styleClass="msgError"/>
+                    </h:panelGrid>
+                </h:form>
+                <h:panelGroup rendered="#{connect.member.scan == 'Administrateur'}">
+                    <h1>Modification des priorités</h1>
+                    <h:form id="newFormScan">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Niveau : "/>
+                            <p:selectOneMenu value="#{gestionMembre.member.scan}">
+                                <f:selectItem itemValue="Membre" itemLabel="Membre" />
+                                <f:selectItem itemValue="Administrateur" itemLabel="Administrateur" />
+                            </p:selectOneMenu>
+                            <h:outputText value=""/>
+                            <h:commandButton value="Modifier les droits" action="#{gestionMembre.doMajScan}" id="msgError"/>
+                            <h:message for="msgError" styleClass="msgError"/>
+                        </h:panelGrid>
+                    </h:form>
+                </h:panelGroup>
             </ui:define>
         </ui:composition>
     </body>

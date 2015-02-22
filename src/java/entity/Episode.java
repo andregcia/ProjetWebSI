@@ -23,10 +23,10 @@ public class Episode implements Serializable {
     public Episode() {
     }
 
-    public Episode(String title, String url, Cours c) {
+    public Episode(String title, String url, Cours cours) {
         this.title = title;
         this.url = url;
-        this.cours = c;
+        this.cours = cours;
     }
 
     public Episode(Cours cours) {
